@@ -7,6 +7,9 @@ import Footer from './components/Footer/Footer';
 import Clock from './components/Clock/Clock';
 import Market from './components/grid-section/Market';
 import Search from './components/grid-section/Search/Search';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+
 import './App.css'
 
 function App() {
@@ -24,7 +27,8 @@ function App() {
           } />
 
           <Route path='/market' element={[<Search />,<Market />]} />
-
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
 
         </Routes>
       </main>

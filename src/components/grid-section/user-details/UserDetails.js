@@ -3,12 +3,12 @@ import styles from './UserDetails.module.css'
 export const UserDetails = ({user, onClose}) => {
     return (
         <div className={styles.overlay}>
-            <div className="backdrop" onClick={onClose}></div>
-            <div className="modal">
-                <div className="detail-container">
-                    <header className="headers">
-                        <h2>User Detail</h2>
-                        <button className="btn close" onClick={onClose}>
+            <div className={styles.backdrop} onClick={onClose}></div>
+            <div className={styles.modal}>
+                <div className={styles['detail-container']}>
+                    <header className={styles.headers}>
+                        <h2>User Details</h2>
+                        <button className={styles.btnClose} onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path fill="currentColor"
@@ -17,12 +17,12 @@ export const UserDetails = ({user, onClose}) => {
                             </svg>
                         </button>
                     </header>
-                    <div className="content">
-                        <div className="image-container">
+                    <div className={styles.content}>
+                        <div className={styles['image-container']}>
                             <img src='./images/profile.png' alt={`Alex's profile.`}
-                                className="image" />
+                                className={styles.image} />
                         </div>
-                        <div className="user-details">
+                        <div className={styles['user-details']}>
                             <p>User Id: <strong>{Math.random()}</strong></p>
                             <p>
                                 Full Name:

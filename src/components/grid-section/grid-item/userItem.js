@@ -16,7 +16,7 @@ export const UserItem = ({onActionClick}) => {
             <td className={styles.profileImage}>today</td>
 
             <td className={styles.actions}>
-                <button className={styles.editBtn} title="Edit">
+                <button className={styles.editBtn} title="Edit" onClick={() => onActionClick(UserActions.Edit)}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-to-square"
                         className="svg-inline--fa fa-pen-to-square" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 532 512">
@@ -25,7 +25,7 @@ export const UserItem = ({onActionClick}) => {
                         </path>
                     </svg>
                 </button>
-                <button className={styles.delBtn} title="Delete" >
+                <button className={styles.delBtn} title="Delete" onClick={() => onActionClick(UserActions.Delete)}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
                         className="svg-inline--fa fa-trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 512">
                         <path fill="currentColor"

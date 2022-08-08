@@ -26,6 +26,7 @@ const Market = () => {
         //       user,
                action: actionType
              });
+             console.log(actionType);
         //   })
     };
 
@@ -180,7 +181,7 @@ const Market = () => {
                                     </svg>
                                 </th>
                                 <th>
-                                    Created
+                                    Last Bid
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas"
                                         data-icon="arrow-down" className={styles.icon} role="img"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -204,49 +205,49 @@ const Market = () => {
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
@@ -254,7 +255,7 @@ const Market = () => {
                     </table>
                 </div>
 
-                <button className={styles.btnAdd} onClick={() => userActionClickHandler(null, UserActions.Add)}>Add new user</button>
+                <button className={styles.btnAdd} onClick={() => userActionClickHandler(UserActions.Add)}>Add new offer</button>
             </section>
         </>
     )
