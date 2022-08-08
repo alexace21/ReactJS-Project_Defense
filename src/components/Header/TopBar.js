@@ -7,13 +7,13 @@ const Top_Bar = () => {
             <nav>
                 <div>
                     <div className={styles.marketLogo}>
-                        <img src="images/market-logo.jpg" alt="logo.png" />
+                        <a href='/'><img src="images/market-logo.jpg" alt="logo.png" /></a>
                     </div>
 
                     <ul>
                         <li>
                             <img src="images/market.png" alt="market.png" />
-                            <a href="/catalog">Market</a>
+                            <a href="/market">Market</a>
                         </li>
                         <li>
                             {/* Logged-in users */}

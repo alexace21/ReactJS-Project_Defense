@@ -16,7 +16,7 @@ body{
 .container{
     display: flex;
     justify-content: space-between;
-    padding: 5px 5% 21px 64px;
+    padding: 0px 5% 0px 60px;
 }
 
 .left-sidebar{
@@ -26,7 +26,7 @@ body{
     border-bottom: 3px solid #ccc;
     border-top: 3px solid #ccc;
     border-right: 3px solid #ccc;
-    margin-left: -70px;
+    margin-left: -65px;
 }
 
 .right-sidebar{
@@ -35,7 +35,7 @@ body{
     border-bottom: 3px solid #ccc;
     border-top: 3px solid #ccc;
     border-left: 3px solid #ccc;
-    margin-right: -101px;
+    margin-right: -95px;
 }
 
 .imp-links a{

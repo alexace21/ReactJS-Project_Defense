@@ -2,7 +2,7 @@ import styles from './Footer.module.css'
 
 const Footer = () => {
     return (
-        <footer>@Project-Defense(ReactJS): Sincerely made by: Alex Asenov Asenov.</footer>
+        <footer>@Project-Defense(ReactJS): Copyright © designed by Alex Asenov Asenov.</footer>
     )
 }
 
