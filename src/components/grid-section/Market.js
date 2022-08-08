@@ -19,14 +19,13 @@ const Market = () => {
 
     //   }, []);
 
-    const userActionClickHandler = (userId, actionType) => {
-        console.log(userId);
+    const userActionClickHandler = (actionType) => {
         // userService.getOne(userId)
         //   .then(user => {
-        //     setUserAction({
+             setUserAction({
         //       user,
-        //       action: actionType
-        //     });
+               action: actionType
+             });
         //   })
     };
 
@@ -109,7 +108,6 @@ const Market = () => {
 
                     {userAction.action === UserActions.Details &&
                         <UserDetails
-                            user={userAction.user}
                             onClose={closeHandler}
                         />
                     }
@@ -199,7 +197,7 @@ const Market = () => {
                             <tr >
                                 <UserItem
                                     // user={user}
-                                    // onActionClick={userActionClickHandler}
+                                     onActionClick={userActionClickHandler}
                                 />
                             </tr>
 

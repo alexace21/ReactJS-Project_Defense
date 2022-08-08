@@ -1,6 +1,8 @@
+import styles from './UserDetails.module.css'
+
 export const UserDetails = ({user, onClose}) => {
     return (
-        <div className="overlay">
+        <div className={styles.overlay}>
             <div className="backdrop" onClick={onClose}></div>
             <div className="modal">
                 <div className="detail-container">
@@ -17,24 +19,24 @@ export const UserDetails = ({user, onClose}) => {
                     </header>
                     <div className="content">
                         <div className="image-container">
-                            <img src={user.imageUrl} alt={`${user.firstName}'s profile.`}
+                            <img src='./images/profile.png' alt={`Alex's profile.`}
                                 className="image" />
                         </div>
                         <div className="user-details">
-                            <p>User Id: <strong>{user._id}</strong></p>
+                            <p>User Id: <strong>{Math.random()}</strong></p>
                             <p>
                                 Full Name:
-                                <strong> {user.firstName} {user.lastName} </strong>
+                                <strong> Alex Asenov </strong>
                             </p>
-                            <p>Email: <strong>{user.email}</strong></p>
-                            <p>Phone Number: <strong>{user.phoneNumber}</strong></p>
+                            <p>Email: <strong>aleks@abv.bg</strong></p>
+                            <p>Phone Number: <strong>0897891657</strong></p>
                             <p>
                                 Address:
-                                <strong>{printAddress(user.address)}</strong>
+                                <strong>Address</strong>
                             </p>
 
-                            <p>Created on: <strong>{user.createdAt}</strong></p>
-                            <p>Modified on: <strong>{user.updatedAt}</strong></p>
+                            <p>Created on: <strong>today</strong></p>
+                            <p>Modified on: <strong>today</strong></p>
                         </div>
                     </div>
                 </div>

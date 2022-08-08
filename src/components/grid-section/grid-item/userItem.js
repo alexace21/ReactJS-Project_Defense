@@ -2,12 +2,12 @@ import { Fragment } from "react";
 import { UserActions } from "../UserConstants";
 import styles from './UserItem.module.css';
 
-export const UserItem = () => {
+export const UserItem = ({onActionClick}) => {
     return (
         <Fragment>
             <td className={styles.profileImage}>
                 <img src="./images/profile.png"
-                    className={styles.image} />
+                    className={styles.image} onMouseEnter={() => onActionClick(UserActions.Details)}/>
             </td>
             <td className={styles.profileImage}>3agramm</td>
             <td className={styles.profileImage}>Nature</td>
@@ -33,7 +33,7 @@ export const UserItem = () => {
                         </path>
                     </svg>
                 </button>
-                <button className={styles.infoBtn} title="Info" >
+                <button className={styles.infoBtn} title="Info" onClick={() => onActionClick(UserActions.Details)}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info"
                         className="svg-inline--fa fa-info" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="-150 0 512 612">
