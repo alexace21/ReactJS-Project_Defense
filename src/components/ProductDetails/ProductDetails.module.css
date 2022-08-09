@@ -180,7 +180,7 @@ div {
     margin-left: 70px;
     margin-right: 200px;
     padding-top: 10px;
-    padding-bottom: 500px;
+    padding-bottom: 400px;
     margin-top: -150px;
     background-color: rgba(0, 0, 0, 0.7);
 }
@@ -202,4 +202,22 @@ div {
 .box-summary h1{
     margin-left: 20px;
     color: white;
+}
+
+.submit-btn{
+    margin-left: 350px;
+    margin-top: 50px;
+    background-color: rgb(81, 194, 123) !important;
+    padding: 5px;
+    color: white;
+    opacity: 0.7;
+    width: 100px;
+    height: 50px;
+    background: #2a87a5;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    font: inherit;
+    font-weight: bold;
+    position: relative;
 }
