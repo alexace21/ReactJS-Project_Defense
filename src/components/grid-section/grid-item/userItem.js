@@ -33,7 +33,7 @@ export const UserItem = ({onActionClick}) => {
                         </path>
                     </svg>
                 </button>
-                <button className={styles.infoBtn} title="Info" onClick={() => onActionClick(UserActions.Details)}>
+                <button className={styles.infoBtn} title="Info" onClick={() => onActionClick(UserActions.OfferDts)}>
                     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info"
                         className="svg-inline--fa fa-info" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="-150 0 512 612">

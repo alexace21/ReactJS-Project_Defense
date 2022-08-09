@@ -4,6 +4,8 @@ import { UserDetails } from "./user-details/UserDetails";
 import { UserEdit } from "./user-edit/UserEdit";
 import { UserDelete } from "./user-delete/UserDelete";
 import { OfferCreate } from "./offer-create/OfferCreate";
+import {OfferDetails} from "./OfferDetails/OfferDetails";
+
 import { useState } from "react";
 
 import styles from './Market.module.css'
@@ -109,6 +111,12 @@ const Market = () => {
 
                     {userAction.action === UserActions.Details &&
                         <UserDetails
+                            onClose={closeHandler}
+                        />
+                    }
+                    
+                    {userAction.action === UserActions.OfferDts &&
+                        <OfferDetails
                             onClose={closeHandler}
                         />
                     }

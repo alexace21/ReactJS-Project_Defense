@@ -1,13 +1,13 @@
-import styles from './UserDetails.module.css'
+import styles from './OfferDetails.module.css'
 
-export const UserDetails = ({user, onClose}) => {
+export const OfferDetails = ({ user, onClose }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.backdrop} onClick={onClose}></div>
             <div className={styles.modal}>
                 <div className={styles['detail-container']}>
                     <header className={styles.headers}>
-                        <h2>Trader Details</h2>
+                        <h2>Offer Details</h2>
                         <button className={styles.btnClose} onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -19,24 +19,26 @@ export const UserDetails = ({user, onClose}) => {
                     </header>
                     <div className={styles.content}>
                         <div className={styles['image-container']}>
-                            <img src='./images/profile.png' alt={`Alex's profile.`}
+                            <img src='./images/camera.jpg' alt={`Alex's profile.`}
                                 className={styles.image} />
                         </div>
                         <div className={styles['user-details']}>
-                            <p>User Id: <strong>{Math.random()}</strong></p>
+                            <p>Seller: <strong>{Math.random()}</strong></p>
                             <p>
-                                Full Name:
-                                <strong> Alex Asenov </strong>
+                                Product Name:
+                                <strong> Camera </strong>
                             </p>
-                            <p>Email: <strong>aleks@abv.bg</strong></p>
-                            <p>Phone Number: <strong>0897891657</strong></p>
+                            <p>Type: <strong>Brand-new</strong></p>
                             <p>
-                                Address:
-                                <strong>Address</strong>
+                                Category:
+                                <strong>Gardening</strong>
                             </p>
 
+                            <p>Phone Number: <strong>0897891657</strong></p>
                             <p>Created on: <strong>today</strong></p>
-                            <p>Modified on: <strong>today</strong></p>
+
+                            <button htmlFor="price" className={styles['label-bid']}>Bid now</button>
+                            <p>Current Price: <strong><input type="number" defaultValue={1} className={styles['input-price']} />$</strong></p>
                         </div>
                     </div>
                 </div>

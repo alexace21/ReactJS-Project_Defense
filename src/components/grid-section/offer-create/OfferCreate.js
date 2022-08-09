@@ -71,52 +71,6 @@ export const OfferCreate = ({
                             </div>
                             <p className={styles['form-error']}>ImageUrl is not valid!</p>
                         </div>
-
-                        <div className={styles['form-row']}>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="country">Country</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="country" name="country" type="text" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Country should be at least 2 characters long!
-                                </p>
-                            </div>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="city">City</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="city" name="city" type="text" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    City should be at least 3 characters long!
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className={styles['form-row']}>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="street">Street</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="street" name="street" type="text" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Street should be at least 3 characters long!
-                                </p>
-                            </div>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="streetNumber">Street number</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="streetNumber" name="streetNumber" type="text" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Street number should be a positive number!
-                                </p>
-                            </div>
-                        </div>
                         <div className={styles['form-actions']}>
                             <button id="action-save" className={styles.btnS} type="submit">Save</button>
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>

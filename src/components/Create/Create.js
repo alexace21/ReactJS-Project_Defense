@@ -20,7 +20,7 @@ const Create = () => {
                         name="category"
                         placeholder="Enter game category..."
                     />
-                    <label htmlFor="levels">Price:</label>
+                    <label htmlFor="levels">Starting Price:</label>
                     <input
                         type="number"
                         id="price"
