@@ -167,21 +167,39 @@ div {
     float: right;
     width: 60%;
     padding-left: 50px;
-
-}
-
-.rightColumn h1{
-    margin-left: 300px;
-}
-
-.rightColumn span{
-    margin-left: 150px;
-}
-
-.rightColumn p{
-    margin-left: 300px;
+    padding-top: 200px;
 }
 
 .productRate{
     margin-top: 20px;
+}
+
+.box-summary{
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-left: 70px;
+    margin-right: 200px;
+    padding-top: 10px;
+    padding-bottom: 500px;
+    margin-top: -150px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.box-summary p{
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 268px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+}
+
+.box-summary span{
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.box-summary h1{
+    margin-left: 20px;
+    color: white;
 }
