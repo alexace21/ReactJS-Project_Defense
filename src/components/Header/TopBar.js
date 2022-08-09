@@ -40,7 +40,7 @@ const Top_Bar = ({ onActionClick }) => {
                     </div>
 
                     <div className={styles.imgIcon}>
-                        <img src="images/profile.png" alt="profilePic" />
+                        <img src="images/profile.png" alt="profilePic" onMouseEnter={() => onActionClick(UserActions.Details)} />
                     </div>
 
                     <ul>

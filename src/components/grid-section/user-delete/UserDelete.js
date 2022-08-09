@@ -10,7 +10,9 @@ export const UserDelete = ({
             <div className={styles.modal}>
                 <div className={styles['confirm-container']}>
                     <header className={styles.headers}>
+
                         <h2>Are you sure you want to delete this offer?</h2>
+
                         <button className={styles['btn-close']} onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -22,7 +24,9 @@ export const UserDelete = ({
                     </header>
                     <div className={styles.actions}>
                         <div className={styles['form-actions']}>
+
                             <button id="action-save" className={styles.btnS} type="submit">Delete</button>
+
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel
                             </button>
