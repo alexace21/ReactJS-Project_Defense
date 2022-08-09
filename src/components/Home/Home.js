@@ -28,7 +28,7 @@ const Home = () => {
                         <img src="./images/bugatii.jpg" />
                         <h3 className={styles['product-title']}>Product1</h3>
                         <div className={styles['data-buttons']}>
-                            <a className={styles['btn']} href="">Details</a>
+                            <a className={styles['btn']} href="product-details">Details</a>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ const Home = () => {
                         <img src="./images/product2.jpg" />
                         <h3 className={styles['product-title']}>Product2</h3>
                         <div className={styles['data-buttons']}>
-                            <a className={styles['btn']} href="">Details</a>
+                            <a className={styles['btn']} href="product-details">Details</a>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const Home = () => {
                         <img src="./images/dog.jpg" />
                         <h3 className={styles['product-title']}>Product3</h3>
                         <div className={styles['data-buttons']}>
-                            <a className={styles['btn']} href="">Details</a>
+                            <a className={styles['btn']} href="product-details">Details</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ const Home = () => {
                         <img src="./images/camera.jpg" />
                         <h3 className={styles['product-title']}>Product4</h3>
                         <div className={styles['data-buttons']}>
-                            <a className={styles['btn']} href="">Details</a>
+                            <a className={styles['btn']} href="product-details">Details</a>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@ const Home = () => {
                         <img src="./images/weapon.png" />
                         <h3 className={styles['product-title']}>Product5</h3>
                         <div className={styles['data-buttons']}>
-                            <a className={styles['btn']} href="">Details</a>
+                            <a className={styles['btn']} href="product-details">Details</a>
                         </div>
                     </div>
                 </div>

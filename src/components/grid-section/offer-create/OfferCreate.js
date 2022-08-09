@@ -1,8 +1,8 @@
-import styles from './UserEdit.module.css';
+import styles from './OfferCreate.module.css';
 
-export const UserEdit = ({
+export const OfferCreate = ({
     onClose,
-    onEdit
+    onUserCreate,
 }) => {
     return (
         < div className={styles.overlay} >
@@ -10,8 +10,8 @@ export const UserEdit = ({
             <div className={styles.modal}>
                 <div className={styles['user-container']}>
                     <header className={styles.headers}>
-                        <h2>Edit Offer</h2>
-                        <button className={styles['btn-close']} onClick={onClose}>
+                        <h2>Add Offer</h2>
+                        <button className={styles.btnClose} onClick={onClose}>
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                                 className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path fill="currentColor"
@@ -20,13 +20,13 @@ export const UserEdit = ({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={onEdit}>
+                    <form onSubmit={onUserCreate}>
                         <div className={styles['form-row']}>
                             <div className={styles['form-group']}>
-                                <label htmlFor="product">Product</label>
+                                <label htmlFor="product">Product Name</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="product" name="product" type="text" defaultValue="Knife" />
+                                    <input id="product" name="product" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Product name should be at least 3 characters long!
@@ -36,7 +36,7 @@ export const UserEdit = ({
                                 <label htmlFor="category">Category</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="category" name="category" type="text" defaultValue="cuttlery" />
+                                    <input id="category" name="category" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Category name should be at least 3 characters long!
@@ -49,7 +49,7 @@ export const UserEdit = ({
                                 <label htmlFor="price">Price</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="price" name="price" type="text" defaultValue="99.99$" />
+                                    <input id="price" name="price" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>Price is not valid!</p>
                             </div>
@@ -57,7 +57,7 @@ export const UserEdit = ({
                                 <label htmlFor="phoneNumber">Phone number</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="phoneNumber" name="phoneNumber" type="text" defaultValue="+358949123" />
+                                    <input id="phoneNumber" name="phoneNumber" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>Phone number is not valid!</p>
                             </div>
@@ -67,7 +67,7 @@ export const UserEdit = ({
                             <label htmlFor="imageUrl">Image Url</label>
                             <div className={styles['input-wrapper']}>
 
-                                <input id="imageUrl" name="imageUrl" type="text" defaultValue="imageBlahblah" />
+                                <input id="imageUrl" name="imageUrl" type="text" />
                             </div>
                             <p className={styles['form-error']}>ImageUrl is not valid!</p>
                         </div>
@@ -76,7 +76,8 @@ export const UserEdit = ({
                             <div className={styles['form-group']}>
                                 <label htmlFor="country">Country</label>
                                 <div className={styles['input-wrapper']}>
-                                    <input id="country" name="country" type="text" defaultValue="Bulgaria" />
+
+                                    <input id="country" name="country" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Country should be at least 2 characters long!
@@ -86,7 +87,7 @@ export const UserEdit = ({
                                 <label htmlFor="city">City</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="city" name="city" type="text" defaultValue="Sofia" />
+                                    <input id="city" name="city" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     City should be at least 3 characters long!
@@ -98,7 +99,8 @@ export const UserEdit = ({
                             <div className={styles['form-group']}>
                                 <label htmlFor="street">Street</label>
                                 <div className={styles['input-wrapper']}>
-                                    <input id="street" name="street" type="text" defaultValue="Banga" />
+
+                                    <input id="street" name="street" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Street should be at least 3 characters long!
@@ -108,7 +110,7 @@ export const UserEdit = ({
                                 <label htmlFor="streetNumber">Street number</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="streetNumber" name="streetNumber" type="text" defaultValue="32" />
+                                    <input id="streetNumber" name="streetNumber" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Street number should be a positive number!
@@ -116,8 +118,8 @@ export const UserEdit = ({
                             </div>
                         </div>
                         <div className={styles['form-actions']}>
-                            <button id="action-save" className={styles['btn-save']} type="submit">Save</button>
-                            <button id="action-cancel" className={styles['btn-cancel']} type="button" onClick={onClose}>
+                            <button id="action-save" className={styles.btnS} type="submit">Save</button>
+                            <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel
                             </button>
                         </div>
@@ -125,5 +127,5 @@ export const UserEdit = ({
                 </div>
             </div>
         </div >
-    )
-}
+    );
+};
