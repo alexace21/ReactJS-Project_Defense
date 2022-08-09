@@ -21,7 +21,7 @@ body{
 
 .left-sidebar{
     flex-basis: 25%;
-    position: sticky;
+    position: relative;
     align-self: flex-start;
     border-bottom: 3px solid #ccc;
     border-top: 3px solid #ccc;

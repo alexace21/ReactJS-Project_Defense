@@ -20,6 +20,7 @@ const Home = () => {
 
                 </div>
             </div>
+            
             {/* //---------Main-sidebar---------\\ */}
             <div className={styles['main-content']}>
                 {/* Product1 */}
