@@ -4,7 +4,7 @@ import { UserDetails } from "./user-details/UserDetails";
 import { UserEdit } from "./user-edit/UserEdit";
 import { UserDelete } from "./user-delete/UserDelete";
 import { OfferCreate } from "./offer-create/OfferCreate";
-import {OfferDetails} from "./OfferDetails/OfferDetails";
+import { OfferDetails } from "./OfferDetails/OfferDetails";
 
 import { useState } from "react";
 
@@ -24,11 +24,11 @@ const Market = () => {
     const userActionClickHandler = (actionType) => {
         // userService.getOne(userId)
         //   .then(user => {
-             setUserAction({
-        //       user,
-               action: actionType
-             });
-             console.log(actionType);
+        setUserAction({
+            //       user,
+            action: actionType
+        });
+        console.log(actionType);
         //   })
     };
 
@@ -114,7 +114,7 @@ const Market = () => {
                             onClose={closeHandler}
                         />
                     }
-                    
+
                     {userAction.action === UserActions.OfferDts &&
                         <OfferDetails
                             onClose={closeHandler}
@@ -206,56 +206,56 @@ const Market = () => {
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
                             <tr >
                                 <UserItem
                                     // user={user}
-                                     onActionClick={userActionClickHandler}
+                                    onActionClick={userActionClickHandler}
                                 />
                             </tr>
 
