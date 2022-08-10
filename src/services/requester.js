@@ -19,10 +19,12 @@ const request = async (method, url, data) => {
                 method: method,
                 headers: {
                     ...headers,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    mode: 'cors'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             })
+            console.log(data);
         }
 
         const response = await buildRequest;
