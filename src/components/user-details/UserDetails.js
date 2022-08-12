@@ -1,15 +1,15 @@
 import { useContext, useState } from 'react';
 import styles from './UserDetails.module.css'
-import { AuthProvider } from '../../context/AuthContext';
+import AuthContext from '../../context/AuthContext';
 
-export const UserDetails = ({ onClose, user, userEditHandler }) => {
-
-    // const {userEditHandler, user} = useContext(AuthProvider);
+export const UserDetails = ({ onClose, editUserClick, trader }) => {
+    const { user } = useContext(AuthContext);
 
     const [isEdit, setIsEdit] = useState(false);
     const [isEdit2, setIsEdit2] = useState(false);
     const [isEdit3, setIsEdit3] = useState(false);
     const [isEdit4, setIsEdit4] = useState(false);
+    const [isEdit5, setIsEdit5] = useState(false);
 
     const onTaskEdit = () => {
         setIsEdit(true);
@@ -23,42 +23,49 @@ export const UserDetails = ({ onClose, user, userEditHandler }) => {
     const onTaskEdit4 = () => {
         setIsEdit4(true);
     };
+    const onTaskEdit5 = () => {
+        setIsEdit5(true);
+    };
 
     const onEditHandler = (e) => {
         e.preventDefault();
         const { fullname } = Object.fromEntries(new FormData(e.target));
         console.log(fullname);
 
-        // taskEditHandler(user, title)
+        editUserClick(user, "fullname", fullname)
         setIsEdit(false);
     };
     const onEditHandler2 = (e) => {
         e.preventDefault();
         const { email } = Object.fromEntries(new FormData(e.target));
-        console.log(user);
-        console.log(email);
 
-        // taskEditHandler(user, title)
+
+        editUserClick(user, "email", email)
         setIsEdit2(false);
     };
     const onEditHandler3 = (e) => {
         e.preventDefault();
         const { contacts } = Object.fromEntries(new FormData(e.target));
-        console.log(contacts);
 
-        // taskEditHandler(user, title)
+        editUserClick(user, "contacts", contacts)
         setIsEdit3(false);
     };
     const onEditHandler4 = (e) => {
         e.preventDefault();
         const { address } = Object.fromEntries(new FormData(e.target));
-        console.log(address);
 
-        // taskEditHandler(user, title)
+        editUserClick(user, "address", address)
         setIsEdit4(false);
     };
+    const onEditHandler5 = (e) => {
+        e.preventDefault();
+        const { image } = Object.fromEntries(new FormData(e.target));
 
-    
+        editUserClick(user, "image", image)
+        setIsEdit5(false);
+    };
+
+
     return (
         <div className={styles.overlay}>
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -77,23 +84,30 @@ export const UserDetails = ({ onClose, user, userEditHandler }) => {
                     </header>
                     <div className={styles.content}>
                         <div className={styles['image-container']}>
-                            <img src='./images/profile.png' alt={`Alex's profile.`}
-                                className={styles.image} />
+                            {trader.image !== 'insert image path here'
+                                ? <img src={trader.image} alt={`Alex's profile.`}
+                                    className={styles.image} />
+                                : <img src='./images/profile.png' alt={`Alex's profile.`}
+                                    className={styles.image} />
+                            }
+
                         </div>
                         <div className={styles['user-details']}>
-                            <span>User Id: <strong>{user._id}</strong></span>
+                            <span>User Id: <strong>{trader._id}</strong></span>
 
                             <span>
                                 Full Name:
                                 {isEdit
                                     ? <form onSubmit={onEditHandler}>
-                                        <input type="text" name="fullname" defaultValue="Alex Asenov" />
+                                        <input type="text" name="fullname" defaultValue={trader.fullname} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>Alex Asenov </strong>
-                                        <button onClick={onTaskEdit}>edit</button>
+                                        <strong>{trader.fullname} </strong>
+                                        {user._id === trader._id &&
+                                            <button onClick={onTaskEdit}>edit</button>
+                                        }
 
                                     </>
                                 }
@@ -102,13 +116,15 @@ export const UserDetails = ({ onClose, user, userEditHandler }) => {
                                 Email:
                                 {isEdit2
                                     ? <form onSubmit={onEditHandler2}>
-                                        <input type="text" name="email" defaultValue="aleks@abv.bg" />
+                                        <input type="text" name="email" defaultValue={trader.email} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>aleks@abv.bg </strong>
-                                        <button onClick={onTaskEdit2}>edit</button>
+                                        <strong>{trader.email} </strong>
+                                        {user._id === trader._id &&
+                                            <button onClick={onTaskEdit2}>edit</button>
+                                        }
 
                                     </>
                                 }
@@ -117,13 +133,15 @@ export const UserDetails = ({ onClose, user, userEditHandler }) => {
                                 Phone Number:
                                 {isEdit3
                                     ? <form onSubmit={onEditHandler3}>
-                                        <input type="text" name="contacts" defaultValue="3598948732" />
+                                        <input type="text" name="contacts" defaultValue={trader.contacts} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>+3598948732 </strong>
-                                        <button onClick={onTaskEdit3}>edit</button>
+                                        <strong>+{trader.contacts} </strong>
+                                        {user._id === trader._id &&
+                                            <button onClick={onTaskEdit3}>edit</button>
+                                        }
 
                                     </>
                                 }
@@ -132,19 +150,38 @@ export const UserDetails = ({ onClose, user, userEditHandler }) => {
                                 Address:
                                 {isEdit4
                                     ? <form onSubmit={onEditHandler4}>
-                                        <input type="text" name="address" defaultValue="Boulevard dolniBogro" />
+                                        <input type="text" name="address" defaultValue={trader.address} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>Boulevard dolniBogro </strong>
-                                        <button onClick={onTaskEdit4}>edit</button>
+                                        <strong>{trader.address} </strong>
+                                        {user._id === trader._id &&
+                                            <button onClick={onTaskEdit4}>edit</button>
+                                        }
+
+                                    </>
+                                }
+                            </span>
+                            <span>
+                                Avatar:
+                                {isEdit5
+                                    ? <form onSubmit={onEditHandler5}>
+                                        <input type="text" name="image" defaultValue={trader.image} />
+                                        <input type="submit" value="edit" />
+                                    </form>
+                                    : <>
+
+                                        <strong>{trader.image} </strong>
+                                        {user._id === trader._id &&
+                                            <button onClick={onTaskEdit5}>edit</button>
+                                        }
 
                                     </>
                                 }
                             </span>
 
-                            <p>Created on: <strong>today</strong></p>
+                            <p>Created on: <strong>{trader.updated}</strong></p>
                         </div>
                     </div>
                 </div>

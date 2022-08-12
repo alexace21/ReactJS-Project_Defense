@@ -4,39 +4,15 @@ import { UserDetails } from '../user-details/UserDetails';
 import { useContext, useEffect, useState } from 'react';
 
 import AuthContext from '../../context/AuthContext';
+import * as userService from '../../services/authService';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
-    const { user, userEditHandler, allUsers } = useContext(AuthContext);
+    const { user, userEditHandler, allUsers, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
 
-    const [loggedUser, setLoggedUser] = useState({});
-    const [userAction, setUserAction] = useState({ user: null, action: null });
-    const userActionClickHandler = (actionType) => {
-        // userService.getOne(userId)
-        //   .then(user => {
-        setUserAction({
-            //       user,
-            action: actionType
-        });
-        console.log(actionType);
-        //   })
-    };
-        
 
-        // const promise =  Promise.resolve(allUsers);
+    const promise = Promise.resolve(allUsers);
 
-        // useEffect(() => {
-        //     promise.then(res => {
-        //         const currentUser = res.find(x => x._id === user._id);
-        //         setLoggedUser(currentUser);
-        //     });
-        // }, [])
-        
-         
-        //  console.log(loggedUser);
-      
-
-    
     const closeHandler = () => {
         setUserAction({ user: null, action: null });
     };
@@ -48,7 +24,7 @@ const Top_Bar = () => {
                 <UserDetails
                     onClose={closeHandler}
                     editUserClick={userEditHandler}
-                    user={user}
+                    trader={userAction.trader}
                 />
             }
 
@@ -92,7 +68,11 @@ const Top_Bar = () => {
                         {/* Guest users */}
                         {user.email
                             ? <div className={styles.imgIcon}>
-                                <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(UserActions.Details)} />
+                                {user.image !== 'insert image path here'
+                                    ? <img src={user.image} alt="profilePic" onMouseEnter={() => userActionClickHandler(user, UserActions.Details)} />
+                                    : <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(user, UserActions.Details)}/>
+                                }
+
                                 <span className={styles['user-email']}>{user.email}</span>
                             </div>
 

@@ -41,7 +41,7 @@ function App() {
             {/* Create Page ( Only for logged-in users ) */}
             <Route path='/create' element={<Create />} />
             {/*Product-Details Page*/}
-            <Route path='/product-details' element={<ProductDetails />} />
+            <Route path='/product-details/:productId' element={<ProductDetails />} />
             {/* 404 Page */}
             <Route path='/*' element={<Page404 />} />
           </Routes>

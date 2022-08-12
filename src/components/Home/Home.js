@@ -1,34 +1,59 @@
 import styles from './Home.module.css'
 import { UserActions } from '../grid-section/UserConstants';
 import { UserDetails } from '../user-details/UserDetails';
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import AuthContext from '../../context/AuthContext';
+import * as userService from '../../services/authService';
+import * as productService from '../../services/productService';
+
 const Home = () => {
-    const [userAction, setUserAction] = useState({ user: null, action: null });
-    const userActionClickHandler = (actionType) => {
-        // userService.getOne(userId)
-        //   .then(user => {
-        setUserAction({
-            //       user,
-            action: actionType
+    const { getAll, user, userActionClickHandler, userAction, setUserAction } = useContext(AuthContext);
+    const [traders, setTraders] = useState([]);
+
+
+    const promise = Promise.resolve(getAll());
+
+    useEffect(() => {
+        promise.then(res => {
+            while (res.length > 4) {
+
+                res.pop();
+
+            }
+            setTraders(res);
         });
-        console.log(actionType);
-        //   })
-    };
+    }, []);
 
     const closeHandler = () => {
         setUserAction({ user: null, action: null });
     };
 
+    // Your products
+    const [availableProducts, setAvailableProducts] = useState([]);
+
+
+
+    useEffect(() => {
+        userService.getOne(user._id)
+            .then(res => {
+                console.log(res);
+                (res.collections).forEach(element => {
+                    productService.getOne(element)
+                        .then(res => setAvailableProducts(state => [...state, res]))
+                });
+            });
+    }, [])
+
+    console.log(availableProducts);
     return (
 
         <>
-
-
             {userAction.action === UserActions.Details &&
                 <UserDetails
                     onClose={closeHandler}
+                    trader={userAction.trader}
                 />
             }
 
@@ -38,78 +63,40 @@ const Home = () => {
                     <span className={styles.sideTitle}>Top Traders</span>
                     <div>
                         <ul className={styles['imp-links']}>
-                            <li><a href=""><img src="./images/image4.png" alt="img1" onMouseEnter={() => userActionClickHandler(UserActions.Details)}/> - Bounty_Hunter</a>Profit: 2314</li>
-                            <li><a href=""><img src="./images/image2.png" alt="img2" onMouseEnter={() => userActionClickHandler(UserActions.Details)}/> - Gold Member</a>Profit: 2314</li>
-                            <li><a href=""><img src="./images/image3.png" alt="img3" onMouseEnter={() => userActionClickHandler(UserActions.Details)}/> - Bigozzaa</a>Profit: 2314</li>
-                            <li><a href=""><img src="./images/image1.jpg" alt="img4" onMouseEnter={() => userActionClickHandler(UserActions.Details)}/> - Certified</a>Profit: 2314</li>
+                            {traders
+                                ? traders.map(x => (<li key={x._id}><a href=""><img src={x.image} alt="img1" onMouseEnter={() => userActionClickHandler(x, UserActions.Details)} /> - {x.fullname}</a>Profit: {x.profit}</li>))
+                                : <span>No users registered!</span>
+                            }
+
+                            {/* <li><a href=""><img src="./images/image4.png" alt="img1" onMouseEnter={() => userActionClickHandler(UserActions.Details)} /> - Bounty_Hunter</a>Profit: 2314</li>
+                            <li><a href=""><img src="./images/image2.png" alt="img2" onMouseEnter={() => userActionClickHandler(UserActions.Details)} /> - Gold Member</a>Profit: 2314</li>
+                            <li><a href=""><img src="./images/image3.png" alt="img3" onMouseEnter={() => userActionClickHandler(UserActions.Details)} /> - Bigozzaa</a>Profit: 2314</li>
+                            <li><a href=""><img src="./images/image1.jpg" alt="img4" onMouseEnter={() => userActionClickHandler(UserActions.Details)} /> - Certified</a>Profit: 2314</li> */}
                         </ul>
                     </div>
                 </div>
 
                 {/* //---------Main-sidebar---------\\ */}
                 <div className={styles['main-content']}>
-                    {/* Product1 */}
-                    <div className={styles.game}>
-                        <div className={styles['image-wrap']}>
-                            <img src="./images/bugatii.jpg" />
-                            <h3 className={styles['product-title']}>Product1</h3>
-                            <div className={styles['data-buttons']}>
-                                <Link className={styles['btn']} to="product-details">Details</Link>
-                            </div>
-                        </div>
-                    </div>
 
+                    {availableProducts
+                        ? availableProducts.map(x =>
+                        (
+                            <div className={styles.game} key={x._id}>
+                                <div className={styles['image-wrap']}>
+                                    <img src={x.image} />
+                                    <h3 className={styles['product-title']}>{x.name}</h3>
+                                    <div className={styles['data-buttons']}>
+                                        <Link className={styles['btn']} to={`/product-details/${x._id}`}>Details</Link>
+                                    </div>
+                                </div>
+                            </div>)
+                        )
 
-                    {/* Product2 */}
-                    <div className={styles.game}>
-                        <div className={styles['image-wrap']}>
-                            <img src="./images/product2.jpg" />
-                            <h3 className={styles['product-title']}>Product2</h3>
-                            <div className={styles['data-buttons']}>
-                                <Link className={styles['btn']} to="product-details">Details</Link>
-                            </div>
-                        </div>
-                    </div>
+                        : <span> No products yet...</span>
+                    }
 
-
-                    {/* Product3 */}
-                    <div className={styles.game}>
-                        <div className={styles['image-wrap']}>
-                            <img src="./images/dog.jpg" />
-                            <h3 className={styles['product-title']}>Product3</h3>
-                            <div className={styles['data-buttons']}>
-                                <Link className={styles['btn']} to="product-details">Details</Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Product4 */}
-                    <div className={styles.game}>
-                        <div className={styles['image-wrap']}>
-                            <img src="./images/camera.jpg" />
-                            <h3 className={styles['product-title']}>Product4</h3>
-                            <div className={styles['data-buttons']}>
-                                <Link className={styles['btn']} to="product-details">Details</Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Product5 */}
-                    <div className={styles.game}>
-                        <div className={styles['image-wrap']}>
-                            <img src="./images/weapon.png" />
-                            <h3 className={styles['product-title']}>Product5</h3>
-                            <div className={styles['data-buttons']}>
-                                <Link className={styles['btn']} to="product-details">Details</Link>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-
-
-
-
 
                 {/* //---------Right-sidebar---------\\ */}
                 <div className={styles['right-sidebar']}>

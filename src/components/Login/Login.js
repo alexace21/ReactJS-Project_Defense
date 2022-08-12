@@ -17,7 +17,6 @@ const Login = () => {
 
         authService.login(email, password)
             .then(authData => {
-                console.log(authData);
                 userLoginHandler(authData)
                 navigate('/');
             })

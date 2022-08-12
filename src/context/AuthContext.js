@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { updateUser, getAll } from '../services/authService';
 const AuthContext = createContext();
@@ -11,22 +11,30 @@ export const AuthProvider = ({
     const [auth, setAuth] = useLocalStorage('auth', {});
 
     const userLoginHandler = (authData) => {
-        setAuth(authData);
+        const {email, fullname, _id, profit, image, contacts, address, updated, ...userData} = authData;
+        setAuth({email, fullname, _id, profit, image, contacts, address, updated});
     };
 
     const userLogout = () => {
         setAuth({});
     };
-
-    const allUsers = getAll();
-        
-    const userEditHandler = async (user, newInfo) => {
-        const updatedUser = { ...user, newInfo: newInfo };
-
-        console.log(updatedUser);
-        // await updateUser(user._id, updatedUser);
+    
+    const [userAction, setUserAction] = useState({ trader: null, action: null });
+    const userEditHandler = async (user, propertyName, newInfo) => {
+        user[propertyName] = newInfo;
+        console.log(user);
+        await updateUser(user._id, user);
+        userLoginHandler(user)
+        setUserAction({...userAction, trader: user});
 
         // setTasks(state => state.map(x => x._id == user._id ? updatedUser : x));
+    };
+
+    const userActionClickHandler = (user, actionType) => {
+        setUserAction({
+            trader: user,
+            action: actionType
+        });
     };
 
     return (
@@ -35,7 +43,10 @@ export const AuthProvider = ({
             userLoginHandler,
             userLogout,
             userEditHandler,
-            allUsers,
+            getAll,
+            userAction,
+            setUserAction,
+            userActionClickHandler,
             isAuthenticated: !!auth.accessToken // Boolean
         }}>
             {children}
