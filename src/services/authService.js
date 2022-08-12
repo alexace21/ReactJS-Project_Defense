@@ -19,3 +19,8 @@ export const logout = async (accessToken) => {
 };
 
 export const register = (email, password) => request.post(`${baseUrl}/register`, { email, password });
+
+export const updateUser = (userId, data) => request.put(`${baseUrl}/${userId}`, {data});
+
+export const getAll = async() => await request.get(`${baseUrl}/users`);
+

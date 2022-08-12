@@ -4,7 +4,9 @@ const request = async (method, url, data) => {
         // const authString = localStorage.getItem('auth');
         // const auth = JSON.parse(authString || {});
 
-        let headers = {};
+        let headers = {
+
+        };
 
         // if (auth.accessToken) {
         //     headers['X-Authorization'] = auth.accessToken;
@@ -20,7 +22,9 @@ const request = async (method, url, data) => {
                 headers: {
                     ...headers,
                     'Content-Type': 'application/json',
-                    mode: 'cors'
+                    'Access-Control-Request-Method': method,
+                    'Access-Control-Request-Headers': 'Content-Type',
+                    mode: 'cores'
                 },
                 body: JSON.stringify(data),
             })

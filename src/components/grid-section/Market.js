@@ -1,6 +1,6 @@
 import { UserActions } from "./UserConstants";
 import { UserItem } from "./grid-item/userItem";
-import { UserDetails } from "./user-details/UserDetails";
+import { UserDetails } from "../user-details/UserDetails";
 import { UserEdit } from "./user-edit/UserEdit";
 import { UserDelete } from "./user-delete/UserDelete";
 import { OfferCreate } from "./offer-create/OfferCreate";

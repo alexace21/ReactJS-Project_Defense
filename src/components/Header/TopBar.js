@@ -1,12 +1,15 @@
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserActions } from '../grid-section/UserConstants';
-import { UserDetails } from '../grid-section/user-details/UserDetails';
-import { useState } from 'react';
+import { UserDetails } from '../user-details/UserDetails';
+import { useContext, useEffect, useState } from 'react';
+
+import AuthContext from '../../context/AuthContext';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
-    const navigate = useNavigate();
+    const { user, userEditHandler, allUsers } = useContext(AuthContext);
 
+    const [loggedUser, setLoggedUser] = useState({});
     const [userAction, setUserAction] = useState({ user: null, action: null });
     const userActionClickHandler = (actionType) => {
         // userService.getOne(userId)
@@ -18,7 +21,22 @@ const Top_Bar = () => {
         console.log(actionType);
         //   })
     };
+        
 
+        // const promise =  Promise.resolve(allUsers);
+
+        // useEffect(() => {
+        //     promise.then(res => {
+        //         const currentUser = res.find(x => x._id === user._id);
+        //         setLoggedUser(currentUser);
+        //     });
+        // }, [])
+        
+         
+        //  console.log(loggedUser);
+      
+
+    
     const closeHandler = () => {
         setUserAction({ user: null, action: null });
     };
@@ -29,6 +47,8 @@ const Top_Bar = () => {
             {userAction.action === UserActions.Details &&
                 <UserDetails
                     onClose={closeHandler}
+                    editUserClick={userEditHandler}
+                    user={user}
                 />
             }
 
@@ -36,7 +56,9 @@ const Top_Bar = () => {
                 <nav>
                     <div>
                         <div className={styles.marketLogo}>
-                            <Link to='/'><img src="images/market-logo.jpg" alt="logo.png" /></Link>
+                            <Link to='/'>
+                                <img src="images/market-logo.jpg" alt="logo.png" />
+                            </Link>
                         </div>
 
                         <ul>
@@ -46,10 +68,13 @@ const Top_Bar = () => {
                             </li>
                             <li>
                                 {/* Logged-in users */}
-                                <div id="user">
-                                    <Link to="/create">Create offer</Link>
-                                    <Link to="/logout">Logout</Link>
-                                </div>
+                                {user.email
+                                    ? <div id="user">
+                                        <Link to="/create">Create offer</Link>
+                                        <Link to="/logout">Logout</Link>
+                                    </div>
+                                    : ""
+                                }
                             </li>
                         </ul>
                     </div>
@@ -64,20 +89,18 @@ const Top_Bar = () => {
                             <img src="./images/search.png" alt="searchImage" />
                             <input type="text" placeholder='Search...' />
                         </div>
+                        {/* Guest users */}
+                        {user.email
+                            ? <div className={styles.imgIcon}>
+                                <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(UserActions.Details)} />
+                                <span className={styles['user-email']}>{user.email}</span>
+                            </div>
 
-                        <div className={styles.imgIcon}>
-                            <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(UserActions.Details)} />
-                        </div>
-
-                        <ul>
-                            <li>
-                                {/* Guest users */}
-                                <div className={styles.guest}>
-                                    <Link to="/login">Login</Link>
-                                    <Link to="/register">Register</Link>
-                                </div>
-                            </li>
-                        </ul>
+                            : <div className={styles.guest}>
+                                <Link to="/login">Login</Link>
+                                <Link to="/register">Register</Link>
+                            </div>
+                        }
                     </div>
                 </nav>
             </header>

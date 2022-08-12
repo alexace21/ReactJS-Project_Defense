@@ -18,13 +18,10 @@ const Register = () => {
         if (password !== confirmPassword) {
             return;
         }
-
-        console.log(email);
-        console.log(password);
-        console.log(confirmPassword);
+        
         authService.register(email, password)
             .then(() => {
-                navigate('/');
+                navigate('/login');
             })
     }
 

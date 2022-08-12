@@ -1,6 +1,6 @@
 import styles from './Home.module.css'
 import { UserActions } from '../grid-section/UserConstants';
-import { UserDetails } from '../grid-section/user-details/UserDetails';
+import { UserDetails } from '../user-details/UserDetails';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 

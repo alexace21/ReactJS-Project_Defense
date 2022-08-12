@@ -1,7 +1,7 @@
 import styles from './ProductDetails.module.css';
 import { useState } from 'react';
 import { UserActions } from '../grid-section/UserConstants';
-import { UserDetails } from '../grid-section/user-details/UserDetails';
+import { UserDetails } from '../user-details/UserDetails';
 
 const ProductDetails = () => {
     const [userAction, setUserAction] = useState({ user: null, action: null });
