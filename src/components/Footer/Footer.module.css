@@ -9,4 +9,6 @@ footer {
     margin-top: 112px;
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    bottom: -16px;
 }

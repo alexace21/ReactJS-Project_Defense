@@ -9,9 +9,8 @@ import * as userService from '../../services/authService';
 import * as productService from '../../services/productService';
 
 const Home = () => {
-    const { getAll, user, userActionClickHandler, userAction, setUserAction } = useContext(AuthContext);
+    const { getAll, user, userActionClickHandler, userAction, setUserAction, closeHandler } = useContext(AuthContext);
     const [traders, setTraders] = useState([]);
-
 
     const promise = Promise.resolve(getAll());
 
@@ -26,15 +25,8 @@ const Home = () => {
         });
     }, []);
 
-    const closeHandler = () => {
-        setUserAction({ user: null, action: null });
-    };
-
     // Your products
     const [availableProducts, setAvailableProducts] = useState([]);
-
-
-
     useEffect(() => {
         userService.getOne(user._id)
             .then(res => {
@@ -46,7 +38,6 @@ const Home = () => {
             });
     }, [])
 
-    console.log(availableProducts);
     return (
 
         <>

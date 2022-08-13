@@ -20,6 +20,7 @@ export const AuthProvider = ({
     };
     
     const [userAction, setUserAction] = useState({ trader: null, action: null });
+    
     const userEditHandler = async (user, propertyName, newInfo) => {
         user[propertyName] = newInfo;
         console.log(user);
@@ -37,6 +38,10 @@ export const AuthProvider = ({
         });
     };
 
+    const closeHandler = () => {
+        setUserAction({ user: null, action: null });
+    };
+
     return (
         <AuthContext.Provider value={{
             user: auth,
@@ -47,6 +52,7 @@ export const AuthProvider = ({
             userAction,
             setUserAction,
             userActionClickHandler,
+            closeHandler,
             isAuthenticated: !!auth.accessToken // Boolean
         }}>
             {children}

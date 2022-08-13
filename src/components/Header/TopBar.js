@@ -8,10 +8,16 @@ import * as userService from '../../services/authService';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
-    const { user, userEditHandler, allUsers, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
+    const { user, userEditHandler } = useContext(AuthContext);
 
 
-    const promise = Promise.resolve(allUsers);
+    const [userAction, setUserAction] = useState({ trader: null, action: null });
+    const userActionClickHandler = (user, actionType) => {
+        setUserAction({
+            trader: user,
+            action: actionType
+        });
+    };
 
     const closeHandler = () => {
         setUserAction({ user: null, action: null });

@@ -32,6 +32,7 @@ function App() {
             } />
             {/* Market Page*/}
             <Route path='/market' element={[<Search />, <Market />]} />
+            <Route path='/market/:productId' element={[<Search />, <Market />]} />
             {/* Login Page ( Only for Guest users ) */}
             <Route path='/login' element={<Login />} />
             {/* Register Page ( Only for Guest users ) */}

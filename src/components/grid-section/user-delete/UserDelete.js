@@ -3,6 +3,7 @@ import styles from './UserDelete.module.css';
 export const UserDelete = ({
     onClose,
     onDel,
+    offerId,
 }) => {
     return (
         <div className={styles.overlay}>
@@ -25,7 +26,7 @@ export const UserDelete = ({
                     <div className={styles.actions}>
                         <div className={styles['form-actions']}>
 
-                            <button id="action-save" className={styles.btnS} type="submit">Delete</button>
+                            <button id="action-save" className={styles.btnS} type="submit" onClick={onDel(offerId)}>Delete</button>
 
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel

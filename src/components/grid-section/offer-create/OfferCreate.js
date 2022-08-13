@@ -1,9 +1,44 @@
+import * as marketService from '../../../services/marketService';
+
 import styles from './OfferCreate.module.css';
 
 export const OfferCreate = ({
     onClose,
-    onUserCreate,
+    user,
+    setOffers,
 }) => {
+
+
+    const onCreate = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const productName = formData.get('productName');
+        const category = formData.get('category');
+        const price = formData.get('price');
+        const imageUrl = formData.get('imageUrl');
+        const duration = formData.get('duration');
+        const owner = user._id;
+
+        const recordToPost = {
+            productName,
+            category,
+            price,
+            imageUrl,
+            duration,
+            owner
+        };
+
+        marketService.create(recordToPost)
+            .then(res => {
+                console.log(res);
+                setOffers(state => [...state, res])
+                onClose();
+            })
+
+    }
+
     return (
         < div className={styles.overlay} >
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -20,13 +55,13 @@ export const OfferCreate = ({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={onUserCreate}>
+                    <form onSubmit={onCreate}>
                         <div className={styles['form-row']}>
                             <div className={styles['form-group']}>
                                 <label htmlFor="product">Product Name</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="product" name="product" type="text" />
+                                    <input id="product" name="productName" type="text" />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Product name should be at least 3 characters long!
@@ -54,12 +89,12 @@ export const OfferCreate = ({
                                 <p className={styles['form-error']}>Price is not valid!</p>
                             </div>
                             <div className={styles['form-group']}>
-                                <label htmlFor="phoneNumber">Phone number</label>
+                                <label htmlFor="phoneNumber">Duration in hours</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="phoneNumber" name="phoneNumber" type="text" />
+                                    <input id="duration" name="duration" type="text" />
                                 </div>
-                                <p className={styles['form-error']}>Phone number is not valid!</p>
+                                <p className={styles['form-error']}>Duration hours field is not valid!</p>
                             </div>
                         </div>
 

@@ -6,64 +6,31 @@ import { UserDelete } from "./user-delete/UserDelete";
 import { OfferCreate } from "./offer-create/OfferCreate";
 import { OfferDetails } from "./OfferDetails/OfferDetails";
 
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import AuthContext from "../../context/AuthContext";
+import * as marketService from '../../services/marketService';
+
 
 import styles from './Market.module.css'
 
 const Market = () => {
+    const navigate = useNavigate();
+    const { user, closeHandler, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
+    
+    const [offers, setOffers] = useState([]);
+    const [currentOffer, setCurrentOffer] = useState('');
 
-    const [users, setUsers] = useState([]); //users
-    const [userAction, setUserAction] = useState({ user: null, action: null });
 
-    //   useEffect(() => {
-    //       userService.getAll()
-    //         .then(users => setUsers(users))
 
-    //   }, []);
+    useEffect(() => {
+        marketService.getAll()
+            .then(res => {
+                console.log(res);
+                setOffers(res)
+            })
 
-    const userActionClickHandler = (actionType) => {
-        // userService.getOne(userId)
-        //   .then(user => {
-        setUserAction({
-            //       user,
-            action: actionType
-        });
-        console.log(actionType);
-        //   })
-    };
-
-    const closeHandler = () => {
-        setUserAction({ user: null, action: null });
-    };
-
-    const userCreateHandler = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.target);
-        const {
-            firstName,
-            lastName,
-            email,
-            imageUrl,
-            phoneNumber,
-            ...address } = Object.fromEntries(formData);
-
-        const userData = {
-            firstName,
-            lastName,
-            email,
-            imageUrl,
-            phoneNumber,
-            address
-        }
-
-        // userService.create(userData)
-        //   .then(user => {
-        //     setUsers(oldUsers => [...oldUsers, user])
-        //     closeHandler();
-        //   });
-
-    }
+    }, []);
 
     const editUserHandler = (e) => {
         e.preventDefault();
@@ -95,14 +62,25 @@ const Market = () => {
         //     closeHandler();
         //   });
 
+    };
+    
+
+    const deleteHandler = (offerId) => {
+        setCurrentOffer(offerId);
+
+        
+        const deleteOfferEndpoint = `/market/${offerId}`;
+        console.log('I am HERE');
+        console.log(offerId);
+        navigate(deleteOfferEndpoint)
+        marketService.del(offerId)
+            .then(res => {
+                console.log(res);
+                console.log('delete');
+                closeHandler()
+            })
     }
 
-    //   const deleteHandler = (userId) => {
-    //     userService.del(userId)
-    //       .then(() => {
-    //         closeHandler()
-    //       })
-    //   }
 
     return (
         <>
@@ -123,7 +101,7 @@ const Market = () => {
 
                     {userAction.action === UserActions.Edit &&
                         <UserEdit
-                            user={userAction.user}
+                            user={userAction.trader}
                             onClose={closeHandler}
                             onEdit={editUserHandler}
                         />
@@ -131,16 +109,18 @@ const Market = () => {
 
                     {userAction.action === UserActions.Delete &&
                         <UserDelete
-                            user={userAction.user}
+                            user={userAction.trader}
                             onClose={closeHandler}
-                        // onDel={deleteHandler}
+                            onDel={deleteHandler}
+                            offer={currentOffer}
                         />
                     }
 
                     {userAction.action === UserActions.Add &&
                         <OfferCreate
                             onClose={closeHandler}
-                            onUserCreate={userCreateHandler}
+                            user={user}
+                            setOffers={setOffers}
                         />
                     }
 
@@ -151,7 +131,7 @@ const Market = () => {
                                     Image
                                 </th>
                                 <th>
-                                    Email<svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                    User<svg aria-hidden="true" focusable="false" data-prefix="fas"
                                         data-icon="arrow-down" className={styles.icon} role="img"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                         <path fill="currentColor"
@@ -189,7 +169,7 @@ const Market = () => {
                                     </svg>
                                 </th>
                                 <th>
-                                    Last Bid
+                                    Expires in
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas"
                                         data-icon="arrow-down" className={styles.icon} role="img"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -203,68 +183,16 @@ const Market = () => {
                         </thead>
                         <tbody>
 
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
-
-                            <tr >
-                                <UserItem
-                                    // user={user}
-                                    onActionClick={userActionClickHandler}
-                                />
-                            </tr>
+                            {offers.map(x => (<tr key={x._id}><UserItem offer={x} onActionClick={userActionClickHandler} user={user} id={x._id} /></tr>))}
 
                         </tbody>
                     </table>
                 </div>
-
-                <button className={styles.btnAdd} onClick={() => userActionClickHandler(UserActions.Add)}>Add new offer</button>
+                {user._id &&
+                    <button className={styles.btnAdd} onClick={() => userActionClickHandler(user, UserActions.Add)}>Add new offer</button>
+                }
             </section>
+            <tr></tr>
         </>
     )
 };

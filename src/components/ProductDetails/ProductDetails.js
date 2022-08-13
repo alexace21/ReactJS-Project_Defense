@@ -10,9 +10,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
     // Sold by: Users
-    const { getAll, user } = useContext(AuthContext);
+    const { getAll, user, closeHandler, userAction, setUserAction } = useContext(AuthContext);
     const [traders, setTraders] = useState([]);
-    const [userAction, setUserAction] = useState({ user: null, action: null });
     const [likes, setLikes] = useState('');
     const [isOwner, setIsOwner] = useState(false);
     const [hasLiked, setHasLiked] = useState(false);
@@ -38,10 +37,6 @@ const ProductDetails = () => {
             setTraders(res);
         });
     }, []);
-
-    const closeHandler = () => {
-        setUserAction({ user: null, action: null });
-    };
 
     // Product Data
     const [actualItem, setActualItem] = useState({});
