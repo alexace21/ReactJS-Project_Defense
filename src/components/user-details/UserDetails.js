@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 import styles from './UserDetails.module.css'
 import AuthContext from '../../context/AuthContext';
+import { updateUser } from '../../services/authService';
 
-export const UserDetails = ({ onClose, editUserClick, trader }) => {
-    const { user } = useContext(AuthContext);
+export const UserDetails = ({ onClose }) => {
+    const { user, userAction, setUserAction, userLoginHandler } = useContext(AuthContext);
 
     const [isEdit, setIsEdit] = useState(false);
     const [isEdit2, setIsEdit2] = useState(false);
@@ -27,12 +28,18 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
         setIsEdit5(true);
     };
 
+    const userEditHandler = async (user, propertyName, newInfo) => {
+        user[propertyName] = newInfo;
+        userLoginHandler(user)
+        setUserAction({ ...userAction, trader: user })
+        const updatedRecord = await updateUser(user._id, user)
+    };
+
     const onEditHandler = (e) => {
         e.preventDefault();
         const { fullname } = Object.fromEntries(new FormData(e.target));
-        console.log(fullname);
 
-        editUserClick(user, "fullname", fullname)
+        userEditHandler(user, "fullname", fullname)
         setIsEdit(false);
     };
     const onEditHandler2 = (e) => {
@@ -40,31 +47,30 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
         const { email } = Object.fromEntries(new FormData(e.target));
 
 
-        editUserClick(user, "email", email)
+        userEditHandler(user, "email", email)
         setIsEdit2(false);
     };
     const onEditHandler3 = (e) => {
         e.preventDefault();
         const { contacts } = Object.fromEntries(new FormData(e.target));
 
-        editUserClick(user, "contacts", contacts)
+        userEditHandler(user, "contacts", contacts)
         setIsEdit3(false);
     };
     const onEditHandler4 = (e) => {
         e.preventDefault();
         const { address } = Object.fromEntries(new FormData(e.target));
 
-        editUserClick(user, "address", address)
+        userEditHandler(user, "address", address)
         setIsEdit4(false);
     };
     const onEditHandler5 = (e) => {
         e.preventDefault();
         const { image } = Object.fromEntries(new FormData(e.target));
 
-        editUserClick(user, "image", image)
+        userEditHandler(user, "image", image)
         setIsEdit5(false);
     };
-
 
     return (
         <div className={styles.overlay}>
@@ -84,8 +90,8 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                     </header>
                     <div className={styles.content}>
                         <div className={styles['image-container']}>
-                            {trader.image !== 'insert image path here'
-                                ? <img src={trader.image} alt={`Alex's profile.`}
+                            {userAction.trader.image !== 'insert image path here'
+                                ? <img src={userAction.trader.image} alt={`Alex's profile.`}
                                     className={styles.image} />
                                 : <img src='./images/profile.png' alt={`Alex's profile.`}
                                     className={styles.image} />
@@ -93,19 +99,19 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
 
                         </div>
                         <div className={styles['user-details']}>
-                            <span>User Id: <strong>{trader._id}</strong></span>
+                            <span>User Id: <strong>{userAction.trader._id}</strong></span>
 
                             <span>
                                 Full Name:
                                 {isEdit
                                     ? <form onSubmit={onEditHandler}>
-                                        <input type="text" name="fullname" defaultValue={trader.fullname} />
+                                        <input type="text" name="fullname" defaultValue={userAction.trader.fullname} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>{trader.fullname} </strong>
-                                        {user._id === trader._id &&
+                                        <strong>{userAction.trader.fullname} </strong>
+                                        {user._id === userAction.trader._id &&
                                             <button onClick={onTaskEdit}>edit</button>
                                         }
 
@@ -116,13 +122,13 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                                 Email:
                                 {isEdit2
                                     ? <form onSubmit={onEditHandler2}>
-                                        <input type="text" name="email" defaultValue={trader.email} />
+                                        <input type="text" name="email" defaultValue={userAction.trader.email} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>{trader.email} </strong>
-                                        {user._id === trader._id &&
+                                        <strong>{userAction.trader.email} </strong>
+                                        {user._id === userAction.trader._id &&
                                             <button onClick={onTaskEdit2}>edit</button>
                                         }
 
@@ -133,13 +139,13 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                                 Phone Number:
                                 {isEdit3
                                     ? <form onSubmit={onEditHandler3}>
-                                        <input type="text" name="contacts" defaultValue={trader.contacts} />
+                                        <input type="text" name="contacts" defaultValue={userAction.trader.contacts} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>+{trader.contacts} </strong>
-                                        {user._id === trader._id &&
+                                        <strong>+{userAction.trader.contacts} </strong>
+                                        {user._id === userAction.trader._id &&
                                             <button onClick={onTaskEdit3}>edit</button>
                                         }
 
@@ -150,13 +156,13 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                                 Address:
                                 {isEdit4
                                     ? <form onSubmit={onEditHandler4}>
-                                        <input type="text" name="address" defaultValue={trader.address} />
+                                        <input type="text" name="address" defaultValue={userAction.trader.address} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>{trader.address} </strong>
-                                        {user._id === trader._id &&
+                                        <strong>{userAction.trader.address} </strong>
+                                        {user._id === userAction.trader._id &&
                                             <button onClick={onTaskEdit4}>edit</button>
                                         }
 
@@ -167,13 +173,13 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                                 Avatar:
                                 {isEdit5
                                     ? <form onSubmit={onEditHandler5}>
-                                        <input type="text" name="image" defaultValue={trader.image} />
+                                        <input type="text" name="image" defaultValue={userAction.trader.image} />
                                         <input type="submit" value="edit" />
                                     </form>
                                     : <>
 
-                                        <strong>{trader.image} </strong>
-                                        {user._id === trader._id &&
+                                        <strong>{userAction.trader.image} </strong>
+                                        {user._id === userAction.trader._id &&
                                             <button onClick={onTaskEdit5}>edit</button>
                                         }
 
@@ -181,7 +187,7 @@ export const UserDetails = ({ onClose, editUserClick, trader }) => {
                                 }
                             </span>
 
-                            <p>Created on: <strong>{trader.updated}</strong></p>
+                            <p>Created on: <strong>{userAction.trader.updated}</strong></p>
                         </div>
                     </div>
                 </div>

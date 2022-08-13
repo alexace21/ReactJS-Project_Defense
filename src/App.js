@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
 
 import { AuthProvider } from './context/AuthContext';
 
 import {PrivateRoute} from './components/Common/PrivateRoute';
 import {PrivateGuard} from './components/Common/PrivateRoute';
+
 import Top_Bar from './components/Header/TopBar';
 import Clock from './components/Clock/Clock';
 import Home from './components/Home/Home';

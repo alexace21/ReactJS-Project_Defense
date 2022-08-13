@@ -4,20 +4,10 @@ import { UserDetails } from '../user-details/UserDetails';
 import { useContext, useEffect, useState } from 'react';
 
 import AuthContext from '../../context/AuthContext';
-import * as userService from '../../services/authService';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
-    const { user, userEditHandler } = useContext(AuthContext);
-
-
-    const [userAction, setUserAction] = useState({ trader: null, action: null });
-    const userActionClickHandler = (user, actionType) => {
-        setUserAction({
-            trader: user,
-            action: actionType
-        });
-    };
+    const { user, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
 
     const closeHandler = () => {
         setUserAction({ user: null, action: null });
@@ -29,8 +19,8 @@ const Top_Bar = () => {
             {userAction.action === UserActions.Details &&
                 <UserDetails
                     onClose={closeHandler}
-                    editUserClick={userEditHandler}
                     trader={userAction.trader}
+                    key={user._id}
                 />
             }
 

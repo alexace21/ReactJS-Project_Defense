@@ -9,7 +9,7 @@ import * as userService from '../../services/authService';
 import * as productService from '../../services/productService';
 
 const Home = () => {
-    const { getAll, user, userActionClickHandler, userAction, setUserAction, closeHandler } = useContext(AuthContext);
+    const { getAll, user, userActionClickHandler, userAction, closeHandler } = useContext(AuthContext);
     const [traders, setTraders] = useState([]);
 
     const promise = Promise.resolve(getAll());

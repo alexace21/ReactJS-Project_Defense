@@ -20,16 +20,6 @@ export const AuthProvider = ({
     };
     
     const [userAction, setUserAction] = useState({ trader: null, action: null });
-    
-    const userEditHandler = async (user, propertyName, newInfo) => {
-        user[propertyName] = newInfo;
-        console.log(user);
-        await updateUser(user._id, user);
-        userLoginHandler(user)
-        setUserAction({...userAction, trader: user});
-
-        // setTasks(state => state.map(x => x._id == user._id ? updatedUser : x));
-    };
 
     const userActionClickHandler = (user, actionType) => {
         setUserAction({
@@ -47,7 +37,6 @@ export const AuthProvider = ({
             user: auth,
             userLoginHandler,
             userLogout,
-            userEditHandler,
             getAll,
             userAction,
             setUserAction,
