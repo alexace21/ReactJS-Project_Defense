@@ -11,17 +11,22 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from "../../context/AuthContext";
 import * as marketService from '../../services/marketService';
 
-
 import styles from './Market.module.css'
 
 const Market = () => {
     const navigate = useNavigate();
-    const { user, closeHandler, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
-    
+    const { user, closeHandler, userAction, setUserAction } = useContext(AuthContext);
+
     const [offers, setOffers] = useState([]);
     const [currentOffer, setCurrentOffer] = useState('');
 
-
+    const userActionClickHandler = (user, actionType, offer) => {
+        setCurrentOffer(offer);
+        setUserAction({
+            trader: user,
+            action: actionType,
+        });
+    };
 
     useEffect(() => {
         marketService.getAll()
@@ -32,54 +37,9 @@ const Market = () => {
 
     }, []);
 
-    const editUserHandler = (e) => {
-        e.preventDefault();
 
-        const formData = new FormData(e.target);
-        const {
-            firstName,
-            lastName,
-            email,
-            imageUrl,
-            phoneNumber,
-            ...address
-        } = Object.fromEntries(formData);
+    console.log(currentOffer);
 
-        const userData = {
-            firstName,
-            lastName,
-            email,
-            imageUrl,
-            phoneNumber,
-            address
-        }
-
-        // let id = e.target.getAttribute('user');
-
-        // userService.edit(userData, id)
-        //   .then(user => {
-        //     setUsers(oldUsers => [...oldUsers, user])
-        //     closeHandler();
-        //   });
-
-    };
-    
-
-    const deleteHandler = (offerId) => {
-        setCurrentOffer(offerId);
-
-        
-        const deleteOfferEndpoint = `/market/${offerId}`;
-        console.log('I am HERE');
-        console.log(offerId);
-        navigate(deleteOfferEndpoint)
-        marketService.del(offerId)
-            .then(res => {
-                console.log(res);
-                console.log('delete');
-                closeHandler()
-            })
-    }
 
 
     return (
@@ -96,23 +56,25 @@ const Market = () => {
                     {userAction.action === UserActions.OfferDts &&
                         <OfferDetails
                             onClose={closeHandler}
+                            offer={currentOffer}
+                            user={user}
+                            updateOffersClick={setOffers}
                         />
                     }
 
                     {userAction.action === UserActions.Edit &&
                         <UserEdit
-                            user={userAction.trader}
                             onClose={closeHandler}
-                            onEdit={editUserHandler}
+                            offer={currentOffer}
+                            updateOffersClick={setOffers}
                         />
                     }
 
                     {userAction.action === UserActions.Delete &&
                         <UserDelete
-                            user={userAction.trader}
                             onClose={closeHandler}
-                            onDel={deleteHandler}
                             offer={currentOffer}
+                            updateOffersClick={setOffers}
                         />
                     }
 
@@ -123,6 +85,12 @@ const Market = () => {
                             setOffers={setOffers}
                         />
                     }
+
+                    {/* {userAction.action === UserActions.ProductDts &&
+                        <ProductDetails 
+                        offer={userAction.offer}
+                        />
+                    } */}
 
                     <table className={styles.table}>
                         <thead>
@@ -183,7 +151,7 @@ const Market = () => {
                         </thead>
                         <tbody>
 
-                            {offers.map(x => (<tr key={x._id}><UserItem offer={x} onActionClick={userActionClickHandler} user={user} id={x._id} /></tr>))}
+                            {offers.map(x => (<tr key={x._id}><UserItem offer={x} onActionClick={userActionClickHandler} user={user} /></tr>))}
 
                         </tbody>
                     </table>

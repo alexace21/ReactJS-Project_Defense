@@ -3,5 +3,6 @@ export const UserActions = {
     Edit: 'edit',
     Delete: 'delete',
     Add: 'add',
-    OfferDts: 'offer-details'
+    OfferDts: 'offer-details',
+    ProductDts: 'product-details'
 };

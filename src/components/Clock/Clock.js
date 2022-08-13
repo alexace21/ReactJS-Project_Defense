@@ -19,7 +19,7 @@ const Clock = () => {
     return (
         <div className={styles.clock}>
             <h1>Time: {currentTime}</h1>
-            <div><h2 className={styles.topTitles}>Top 5 Products</h2></div>
+            <div><h2 className={styles.topTitles}>Your Products...</h2></div>
         </div>
         
 

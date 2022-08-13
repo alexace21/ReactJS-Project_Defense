@@ -53,7 +53,7 @@ export const AuthProvider = ({
             setUserAction,
             userActionClickHandler,
             closeHandler,
-            isAuthenticated: !!auth.accessToken // Boolean
+            isAuthenticated: !!auth._id // Boolean
         }}>
             {children}
         </AuthContext.Provider>
@@ -77,5 +77,6 @@ export const withAuth = (Component) => {
 
     return AuthWrapper;
 };
+
 
 

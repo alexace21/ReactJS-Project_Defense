@@ -8,7 +8,7 @@ export const UserItem = ({ onActionClick, offer, user }) => {
         <Fragment>
             <td className={styles.profileImage}>
                 <img src={offer.imageUrl}
-                    className={styles.image} onMouseEnter={() => onActionClick(user, UserActions.Details)} />
+                    className={styles.image} />
             </td>
             <td className={styles.profileImage}>{offer.owner}</td>
             <td className={styles.profileImage}>{offer.category}</td>
@@ -19,7 +19,7 @@ export const UserItem = ({ onActionClick, offer, user }) => {
             <td className={styles.actions}>
                 {user._id && isOwner &&
 
-                    <button className={styles.editBtn} title="Edit" onClick={() => onActionClick(user, UserActions.Edit)}>
+                    <button className={styles.editBtn} title="Edit" onClick={() => onActionClick(user, UserActions.Edit, offer)}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-to-square"
                             className="svg-inline--fa fa-pen-to-square" role="img" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 532 512">
@@ -30,7 +30,7 @@ export const UserItem = ({ onActionClick, offer, user }) => {
                     </button>
                 }
                 {user._id && isOwner &&
-                    <button className={styles.delBtn} title="Delete" onClick={() => onActionClick(user, UserActions.Delete)}>
+                    <button className={styles.delBtn} title="Delete" onClick={() => onActionClick(user, UserActions.Delete, offer._id)}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash"
                             className="svg-inline--fa fa-trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 498 512">
                             <path fill="currentColor"
@@ -40,7 +40,7 @@ export const UserItem = ({ onActionClick, offer, user }) => {
                     </button>
                 }
                 {user._id &&
-                    <button className={styles.infoBtn} title="Info" onClick={() => onActionClick(user, UserActions.OfferDts)}>
+                    <button className={styles.infoBtn} title="Info" onClick={() => onActionClick(user, UserActions.OfferDts, offer)}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info"
                             className="svg-inline--fa fa-info" role="img" xmlns="http://www.w3.org/2000/svg"
                             viewBox="-150 0 512 612">

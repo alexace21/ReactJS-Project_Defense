@@ -1,6 +1,34 @@
+import { useEffect, useState } from 'react';
 import styles from './OfferDetails.module.css'
+import * as marketService from '../../../services/marketService';
 
-export const OfferDetails = ({ user, onClose }) => {
+export const OfferDetails = ({ user, onClose, offer, updateOffersClick }) => {
+
+    const [values, setValues] = useState({
+        price: ''
+    });
+
+    const changeHandler = (e) => {
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }));
+    };
+    const onBid = (e) => {
+        e.preventDefault();
+        console.log(values.price);
+        marketService.getOne(offer._id)
+            .then(res => {
+
+                res.bidders.push(user._id)
+                res.price = values.price;
+                marketService.udpateOne(res._id, res)
+                    .then(res => {
+                        updateOffersClick(res);
+                        onClose()
+                    })
+            })
+    }
     return (
         <div className={styles.overlay}>
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -19,26 +47,24 @@ export const OfferDetails = ({ user, onClose }) => {
                     </header>
                     <div className={styles.content}>
                         <div className={styles['image-container']}>
-                            <img src='./images/camera.jpg' alt={`Alex's profile.`}
+                            <img src={offer.imageUrl} alt={`Alex's profile.`}
                                 className={styles.image} />
                         </div>
                         <div className={styles['user-details']}>
-                            <p>Seller: <strong>{Math.random()}</strong></p>
+                            <p>Seller: <strong>{offer.owner}</strong></p>
                             <p>
                                 Product Name:
-                                <strong> Camera </strong>
+                                <strong> {offer.productName} </strong>
                             </p>
-                            <p>Type: <strong>Brand-new</strong></p>
                             <p>
                                 Category:
-                                <strong>Gardening</strong>
+                                <strong>{offer.category}</strong>
                             </p>
 
-                            <p>Phone Number: <strong>0897891657</strong></p>
-                            <p>Created on: <strong>today</strong></p>
+                            <p>Created on: <strong>{offer.updated}</strong></p>
 
-                            <button htmlFor="price" className={styles['label-bid']}>Bid now</button>
-                            <p>Current Price: <strong><input type="number" defaultValue={1} className={styles['input-price']} />$</strong></p>
+                            <button htmlFor="price" className={styles['label-bid']} onClick={onBid}>Bid now</button>
+                            <p>Current Price: <strong><input type="number" name='price' defaultValue={offer.price} className={styles['input-price']} onChange={changeHandler} />$</strong></p>
                         </div>
                     </div>
                 </div>

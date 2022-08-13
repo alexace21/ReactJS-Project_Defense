@@ -3,6 +3,8 @@ import { lazy, Suspense } from 'react';
 
 import { AuthProvider } from './context/AuthContext';
 
+import {PrivateRoute} from './components/Common/PrivateRoute';
+import {PrivateGuard} from './components/Common/PrivateRoute';
 import Top_Bar from './components/Header/TopBar';
 import Clock from './components/Clock/Clock';
 import Home from './components/Home/Home';
@@ -34,13 +36,13 @@ function App() {
             <Route path='/market' element={[<Search />, <Market />]} />
             <Route path='/market/:productId' element={[<Search />, <Market />]} />
             {/* Login Page ( Only for Guest users ) */}
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<PrivateGuard><Login /></PrivateGuard>} />
             {/* Register Page ( Only for Guest users ) */}
-            <Route path='/register' element={<Register />} />
+            <Route path='/register' element={<PrivateGuard><Register /></PrivateGuard>} />
             {/* Logout Page ( Only for Logged-in users ) */}
-            <Route path='/logout' element={<Logout />} />
+            <Route path='/logout' element={<PrivateRoute><Logout /></PrivateRoute>} />
             {/* Create Page ( Only for logged-in users ) */}
-            <Route path='/create' element={<Create />} />
+            <Route path='/create' element={<PrivateRoute><Create /></PrivateRoute>} />
             {/*Product-Details Page*/}
             <Route path='/product-details/:productId' element={<ProductDetails />} />
             {/* 404 Page */}

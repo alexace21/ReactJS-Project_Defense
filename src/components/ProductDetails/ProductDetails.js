@@ -8,7 +8,8 @@ import * as userService from '../../services/authService';
 import * as productService from '../../services/productService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const ProductDetails = () => {
+const ProductDetails = (offer) => {
+    console.log(offer.offer);
     // Sold by: Users
     const { getAll, user, closeHandler, userAction, setUserAction } = useContext(AuthContext);
     const [traders, setTraders] = useState([]);

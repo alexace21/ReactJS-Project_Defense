@@ -1,10 +1,32 @@
 import styles from './UserDelete.module.css';
+import { useEffect } from 'react';
+import * as marketService from '../../../services/marketService';
+import { useNavigate } from 'react-router-dom';
 
 export const UserDelete = ({
     onClose,
-    onDel,
-    offerId,
+    offer,
+    updateOffersClick
 }) => {
+    const navigate = useNavigate();
+    const deleteHandler = (offerId) => {
+        useEffect(() => {
+            const deleteOfferEndpoint = `/market/${offerId}`;
+            navigate(deleteOfferEndpoint)
+            marketService.del(offerId)
+                .then(() => {
+                    marketService.getAll()
+                        .then(res => {
+                            console.log(res)
+                            updateOffersClick(res);
+                            onClose()
+                        })
+                })
+
+
+        }, [])
+    }
+
     return (
         <div className={styles.overlay}>
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -26,7 +48,7 @@ export const UserDelete = ({
                     <div className={styles.actions}>
                         <div className={styles['form-actions']}>
 
-                            <button id="action-save" className={styles.btnS} type="submit" onClick={onDel(offerId)}>Delete</button>
+                            <button id="action-save" className={styles.btnS} type="submit" onClick={deleteHandler(offer)}>Delete</button>
 
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel

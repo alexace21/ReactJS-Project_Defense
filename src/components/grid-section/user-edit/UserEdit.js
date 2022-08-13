@@ -1,9 +1,44 @@
 import styles from './UserEdit.module.css';
+import * as marketService from '../../../services/marketService';
 
 export const UserEdit = ({
     onClose,
-    onEdit
+    updateOffersClick,
+    offer
 }) => {
+
+    const editUserHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const productName = formData.get('productName');
+        const category = formData.get('category');
+        const price = formData.get('price');
+        const imageUrl = formData.get('imageUrl');
+
+        marketService.udpateOne(offer._id, {
+            productName,
+            category,
+            price,
+            imageUrl
+        }).then(
+            res => {
+                console.log(res);
+                updateOffersClick(res);
+                onClose();
+            }
+        )
+        // let id = e.target.getAttribute('user');
+
+        // userService.edit(userData, id)
+        //   .then(user => {
+        //     setUsers(oldUsers => [...oldUsers, user])
+        //     closeHandler();
+        //   });
+
+    };
+
     return (
         < div className={styles.overlay} >
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -22,13 +57,13 @@ export const UserEdit = ({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={onEdit}>
+                    <form onSubmit={editUserHandler}>
                         <div className={styles['form-row']}>
                             <div className={styles['form-group']}>
-                                <label htmlFor="product">Product</label>
+                                <label htmlFor="product">Product Name</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="product" name="product" type="text" defaultValue="Knife" />
+                                    <input id="product" name="productName" type="text" defaultValue={offer.productName} />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Product name should be at least 3 characters long!
@@ -38,7 +73,7 @@ export const UserEdit = ({
                                 <label htmlFor="category">Category</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="category" name="category" type="text" defaultValue="cuttlery" />
+                                    <input id="category" name="category" type="text" defaultValue={offer.category} />
                                 </div>
                                 <p className={styles['form-error']}>
                                     Category name should be at least 3 characters long!
@@ -51,72 +86,22 @@ export const UserEdit = ({
                                 <label htmlFor="price">Price</label>
                                 <div className={styles['input-wrapper']}>
 
-                                    <input id="price" name="price" type="text" defaultValue="99.99$" />
+                                    <input id="price" name="price" type="text" defaultValue={offer.price} />
                                 </div>
                                 <p className={styles['form-error']}>Price is not valid!</p>
                             </div>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="phoneNumber">Phone number</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="phoneNumber" name="phoneNumber" type="text" defaultValue="+358949123" />
-                                </div>
-                                <p className={styles['form-error']}>Phone number is not valid!</p>
-                            </div>
+                            
                         </div>
 
                         <div className="form-group long-line">
                             <label htmlFor="imageUrl">Image Url</label>
                             <div className={styles['input-wrapper']}>
 
-                                <input id="imageUrl" name="imageUrl" type="text" defaultValue="imageBlahblah" />
+                                <input id="image" name="imageUrl" type="text" defaultValue={offer.imageUrl} />
                             </div>
                             <p className={styles['form-error']}>ImageUrl is not valid!</p>
                         </div>
 
-                        <div className={styles['form-row']}>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="country">Country</label>
-                                <div className={styles['input-wrapper']}>
-                                    <input id="country" name="country" type="text" defaultValue="Bulgaria" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Country should be at least 2 characters long!
-                                </p>
-                            </div>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="city">City</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="city" name="city" type="text" defaultValue="Sofia" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    City should be at least 3 characters long!
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className={styles['form-row']}>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="street">Street</label>
-                                <div className={styles['input-wrapper']}>
-                                    <input id="street" name="street" type="text" defaultValue="Banga" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Street should be at least 3 characters long!
-                                </p>
-                            </div>
-                            <div className={styles['form-group']}>
-                                <label htmlFor="streetNumber">Street number</label>
-                                <div className={styles['input-wrapper']}>
-
-                                    <input id="streetNumber" name="streetNumber" type="text" defaultValue="32" />
-                                </div>
-                                <p className={styles['form-error']}>
-                                    Street number should be a positive number!
-                                </p>
-                            </div>
-                        </div>
                         <div className={styles['form-actions']}>
                             <button id="action-save" className={styles['btn-save']} type="submit">Save</button>
                             <button id="action-cancel" className={styles['btn-cancel']} type="button" onClick={onClose}>
