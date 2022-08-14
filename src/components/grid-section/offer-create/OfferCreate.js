@@ -89,7 +89,7 @@ export const OfferCreate = ({
                                 <p className={styles['form-error']}>Price is not valid!</p>
                             </div>
                             <div className={styles['form-group']}>
-                                <label htmlFor="phoneNumber">Duration in hours</label>
+                                <label htmlFor="phoneNumber">Duration in days</label>
                                 <div className={styles['input-wrapper']}>
 
                                     <input id="duration" name="duration" type="text" />

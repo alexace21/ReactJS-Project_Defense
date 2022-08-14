@@ -1,29 +1,15 @@
 import { Link } from 'react-router-dom';
 import { UserActions } from '../grid-section/UserConstants';
-import { UserDetails } from '../user-details/UserDetails';
-import { useContext, useEffect, useState } from 'react';
+import { useContext} from 'react';
 
 import AuthContext from '../../context/AuthContext';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
-    const { user, userAction, setUserAction, userActionClickHandler } = useContext(AuthContext);
-
-    const closeHandler = () => {
-        setUserAction({ user: null, action: null });
-    };
+    const { user, userActionClickHandler } = useContext(AuthContext);
 
     return (
         <>
-
-            {userAction.action === UserActions.Details &&
-                <UserDetails
-                    onClose={closeHandler}
-                    trader={userAction.trader}
-                    key={user._id}
-                />
-            }
-
             <header>
                 <nav>
                     <div>
@@ -66,7 +52,7 @@ const Top_Bar = () => {
                             ? <div className={styles.imgIcon}>
                                 {user.image !== 'insert image path here'
                                     ? <img src={user.image} alt="profilePic" onMouseEnter={() => userActionClickHandler(user, UserActions.Details)} />
-                                    : <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(user, UserActions.Details)}/>
+                                    : <img src="images/profile.png" alt="profilePic" onMouseEnter={() => userActionClickHandler(user, UserActions.Details)} />
                                 }
 
                                 <span className={styles['user-email']}>{user.email}</span>

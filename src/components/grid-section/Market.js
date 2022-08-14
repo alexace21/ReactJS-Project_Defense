@@ -37,11 +37,6 @@ const Market = () => {
 
     }, []);
 
-
-    console.log(currentOffer);
-
-
-
     return (
         <>
             <section className={styles.cardUserContainer}>
@@ -108,7 +103,7 @@ const Market = () => {
                                     </svg>
                                 </th>
                                 <th>
-                                    Category<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-down"
+                                    Last Bidder<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-down"
                                         className={styles.icon} role="img" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 384 512">
                                         <path fill="currentColor"

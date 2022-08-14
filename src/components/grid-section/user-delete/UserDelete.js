@@ -13,7 +13,9 @@ export const UserDelete = ({
         useEffect(() => {
             const deleteOfferEndpoint = `/market/${offerId}`;
             navigate(deleteOfferEndpoint)
-            marketService.del(offerId)
+            const confirmation = confirm(`Are you sure you want to there offer: ${offerId}`);
+            if(confirmation){
+                marketService.del(offerId)
                 .then(() => {
                     marketService.getAll()
                         .then(res => {
@@ -22,8 +24,7 @@ export const UserDelete = ({
                             onClose()
                         })
                 })
-
-
+            }
         }, [])
     }
 

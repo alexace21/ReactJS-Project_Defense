@@ -1,9 +1,46 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { UserActions } from "../UserConstants";
 import styles from './UserItem.module.css';
 
 export const UserItem = ({ onActionClick, offer, user }) => {
     const isOwner = offer.owner === user._id;
+
+    //Timer:
+    const [timer, setTimer] = useState('00:00:00');
+
+    ///////////////////////////////////////
+    const getTimeRemaining = (e) => {
+        const offerCreatedOnDate = new Date(offer.updated);
+        const days = e * (60 * 60 * 24 * 1000);
+        const dateSetToExpireIn = new Date(offerCreatedOnDate.getTime() + days);
+
+        let countDownDate = dateSetToExpireIn.getTime();
+ 
+        const setCorrectTime = (1000 * 60 * 60) * (e * 24);
+        setInterval(() => {
+             let now = new Date().getTime();
+             let timeleft = Math.abs(countDownDate - now);
+             
+             let hours = Math.floor((timeleft % (setCorrectTime)) / (1000 * 60 * 60));
+             let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+             let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+             setTimer(
+                (hours > 9 ? hours : '0' + hours) + ':' +
+                (minutes > 9 ? minutes : '0' + minutes) + ':'
+                + (seconds > 9 ? seconds : '0' + seconds)
+            )
+            
+        }, 1000)
+
+    };
+  
+    useEffect(() => {
+        getTimeRemaining(offer.duration)
+    }, [])
+
+    const lastBidder = offer.bidders.slice((offer.bidders.length - 1))
+
     return (
         <Fragment>
             <td className={styles.profileImage}>
@@ -11,10 +48,10 @@ export const UserItem = ({ onActionClick, offer, user }) => {
                     className={styles.image} />
             </td>
             <td className={styles.profileImage}>{offer.owner}</td>
-            <td className={styles.profileImage}>{offer.category}</td>
+            <td className={styles.profileImage}>{lastBidder}</td>
             <td className={styles.profileImage}>{offer.productName}</td>
             <td className={styles.profileImage}>{offer.price}$</td>
-            <td className={styles.profileImage}>{offer.duration}</td>
+            <td className={styles.profileImage}>{timer}</td>
 
             <td className={styles.actions}>
                 {user._id && isOwner &&
