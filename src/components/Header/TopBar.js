@@ -28,7 +28,7 @@ const Top_Bar = () => {
                                 {/* Logged-in users */}
                                 {user.email
                                     ? <div id="user">
-                                        <Link to="/create">Create offer</Link>
+                                        <Link to="/catalog">Catalog</Link>
                                         <Link to="/logout">Logout</Link>
                                     </div>
                                     : ""

@@ -1,9 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { UserActions } from "../UserConstants";
+import { useNavigate } from 'react-router-dom';
 import styles from './UserItem.module.css';
+import * as marketService from '../../../services/marketService';
 
-export const UserItem = ({ onActionClick, offer, user }) => {
+export const UserItem = ({ onActionClick, offer, user, setOffers }) => {
     const isOwner = offer.owner === user._id;
+    const navigate = useNavigate();
 
     //Timer:
     const [timer, setTimer] = useState('00:00:00');
@@ -15,29 +18,42 @@ export const UserItem = ({ onActionClick, offer, user }) => {
         const dateSetToExpireIn = new Date(offerCreatedOnDate.getTime() + days);
 
         let countDownDate = dateSetToExpireIn.getTime();
- 
+
         const setCorrectTime = (1000 * 60 * 60) * (e * 24);
         setInterval(() => {
-             let now = new Date().getTime();
-             let timeleft = Math.abs(countDownDate - now);
-             
-             let hours = Math.floor((timeleft % (setCorrectTime)) / (1000 * 60 * 60));
-             let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-             let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+            let now = new Date().getTime();
+            let timeleft = Math.abs(countDownDate - now);
 
-             setTimer(
+            let hours = Math.floor((timeleft % (setCorrectTime)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+            setTimer(
                 (hours > 9 ? hours : '0' + hours) + ':' +
                 (minutes > 9 ? minutes : '0' + minutes) + ':'
                 + (seconds > 9 ? seconds : '0' + seconds)
             )
-            
+
         }, 1000)
 
     };
-  
+
     useEffect(() => {
         getTimeRemaining(offer.duration)
     }, [])
+
+    if (timer === "00:00:01") {
+        const deleteOfferEndpoint = `/market/${offer._id}`;
+        navigate(deleteOfferEndpoint)
+        marketService.del(offer._id)
+            .then(() => {
+                marketService.getAll()
+                    .then(res => {
+                        setOffers(res);
+                        navigate('/market');
+                    })
+            })
+    }
 
     const lastBidder = offer.bidders.slice((offer.bidders.length - 1))
 

@@ -113,10 +113,9 @@ const ProductDetails = (offer) => {
                         <p className={styles.productRate}>This product has been liked: {likes} times.</p>
                     </div>
                     <div>
-                        
                         {booly
                         ? <button onClick={onLike} type='submit' className={styles['submit-btn']}>Like this product!</button>
-                        : <span className={styles['no-likes']}> You have already liked!</span>
+                        : <span className={styles['no-likes']}></span>
                         }
                         
                         

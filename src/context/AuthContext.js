@@ -11,8 +11,8 @@ export const AuthProvider = ({
     const [auth, setAuth] = useLocalStorage('auth', {});
 
     const userLoginHandler = (authData) => {
-        const {email, fullname, _id, profit, image, contacts, address, updated, ...userData} = authData;
-        setAuth({email, fullname, _id, profit, image, contacts, address, updated});
+        const {email, fullname, _id, profit, image, contacts, address, updated, collections, ...userData} = authData;
+        setAuth({email, fullname, _id, profit, image, contacts, address, updated, collections});
     };
 
     const userLogout = () => {

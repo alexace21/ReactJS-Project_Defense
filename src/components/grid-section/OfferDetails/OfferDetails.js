@@ -29,6 +29,9 @@ export const OfferDetails = ({ user, onClose, offer, updateOffersClick }) => {
                     })
             })
     }
+
+    const isOwner = offer.owner === user._id;
+
     return (
         <div className={styles.overlay}>
             <div className={styles.backdrop} onClick={onClose}></div>
@@ -63,8 +66,12 @@ export const OfferDetails = ({ user, onClose, offer, updateOffersClick }) => {
 
                             <p>Created on: <strong>{offer.updated}</strong></p>
 
-                            <button htmlFor="price" className={styles['label-bid']} onClick={onBid}>Bid now</button>
+                            {!isOwner
+                                ?   (<button htmlFor="price" className={styles['label-bid']} onClick={onBid}>Bid now</button>)
+                                : ""
+                            }
                             <p>Current Price: <strong><input type="number" name='price' defaultValue={offer.price} className={styles['input-price']} onChange={changeHandler} />$</strong></p>
+
                         </div>
                     </div>
                 </div>

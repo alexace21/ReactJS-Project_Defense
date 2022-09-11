@@ -13,7 +13,7 @@ export const UserDelete = ({
         useEffect(() => {
             const deleteOfferEndpoint = `/market/${offerId}`;
             navigate(deleteOfferEndpoint)
-            const confirmation = confirm(`Are you sure you want to there offer: ${offerId}`);
+            const confirmation = confirm(`Are you sure you want to delete offer: ${offerId}`);
             if(confirmation){
                 marketService.del(offerId)
                 .then(() => {

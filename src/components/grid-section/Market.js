@@ -146,7 +146,7 @@ const Market = () => {
                         </thead>
                         <tbody>
 
-                            {offers.map(x => (<tr key={x._id}><UserItem offer={x} onActionClick={userActionClickHandler} user={user} /></tr>))}
+                            {offers.map(x => (<tr key={x._id}><UserItem offer={x} onActionClick={userActionClickHandler} setOffers={setOffers} user={user} /></tr>))}
 
                         </tbody>
                     </table>

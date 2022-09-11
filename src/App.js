@@ -8,6 +8,7 @@ import {PrivateGuard} from './components/Common/PrivateRoute';
 import Top_Bar from './components/Header/TopBar';
 import Clock from './components/Clock/Clock';
 import Home from './components/Home/Home';
+import Catalog from './components/Catalog/Catalog';
 import Market from './components/grid-section/Market';
 import Search from './components/grid-section/Search/Search';
 import Login from './components/Login/Login';
@@ -45,6 +46,7 @@ function App() {
             <Route path='/create' element={<PrivateRoute><Create /></PrivateRoute>} />
             {/*Product-Details Page*/}
             <Route path='/product-details/:productId' element={<ProductDetails />} />
+            <Route path='/catalog' element={<Catalog />} />
             {/* 404 Page */}
             <Route path='/*' element={<Page404 />} />
           </Routes>

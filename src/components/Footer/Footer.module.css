@@ -1,14 +1,12 @@
 footer {
-    background: powderblue;
-    padding: 1em;
+    background: #29303c;
     text-align: center;
-    color: green;
+    color: whitesmoke;
     font-size: 20px;
     font-size: x-large;
-    padding: 10px;
-    margin-top: 112px;
+    padding: 8px;
     font-weight: 500;
     font-family: 'Times New Roman', Times, serif;
     position: relative;
-    bottom: -16px;
+    top: 45px;
 }

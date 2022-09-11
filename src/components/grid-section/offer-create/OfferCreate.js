@@ -1,5 +1,5 @@
 import * as marketService from '../../../services/marketService';
-
+import * as productService from '../../../services/productService';
 import styles from './OfferCreate.module.css';
 
 export const OfferCreate = ({
@@ -38,6 +38,18 @@ export const OfferCreate = ({
             })
 
     }
+
+
+    let availableProducts = [];
+
+    user.collections.map(x => {
+        productService.getOne(x)
+            .then(res => {
+                availableProducts.push(<option value={res._id}>{res.name}</option>);
+            })
+    })
+
+    console.log(availableProducts)
 
     return (
         < div className={styles.overlay} >
@@ -106,8 +118,26 @@ export const OfferCreate = ({
                             </div>
                             <p className={styles['form-error']}>ImageUrl is not valid!</p>
                         </div>
+                        <div>
+                            <label htmlFor="product">Available products</label>
+                            <select id='product' name='product'>
+                                {user.collections.map(x => {
+                                    productService.getOne(x)
+                                        .then(res => {
+                                            console.log(res);
+                                            return (<option value={res._id}>{res.name}</option>);
+                                        })
+                                })}
+                            </select>
+                        </div>
                         <div className={styles['form-actions']}>
+                            {user.collections.length > 0 &&
+                            
                             <button id="action-save" className={styles.btnS} type="submit">Save</button>
+                            }
+                            {user.collections.length < 1 &&
+                            <button id="action-save" className={styles.btnS} type="submit" disabled>Save</button>
+                            }
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel
                             </button>
