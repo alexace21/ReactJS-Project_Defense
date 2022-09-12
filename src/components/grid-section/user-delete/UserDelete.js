@@ -9,12 +9,11 @@ export const UserDelete = ({
     updateOffersClick
 }) => {
     const navigate = useNavigate();
-    const deleteHandler = (offerId) => {
+    const DeleteHandler = (offerId) => {
         useEffect(() => {
             const deleteOfferEndpoint = `/market/${offerId}`;
             navigate(deleteOfferEndpoint)
-            const confirmation = confirm(`Are you sure you want to delete offer: ${offerId}`);
-            if(confirmation){
+           
                 marketService.del(offerId)
                 .then(() => {
                     marketService.getAll()
@@ -24,7 +23,7 @@ export const UserDelete = ({
                             onClose()
                         })
                 })
-            }
+
         }, [])
     }
 
@@ -49,7 +48,7 @@ export const UserDelete = ({
                     <div className={styles.actions}>
                         <div className={styles['form-actions']}>
 
-                            <button id="action-save" className={styles.btnS} type="submit" onClick={deleteHandler(offer)}>Delete</button>
+                            <button id="action-save" className={styles.btnS} type="submit" onClick={DeleteHandler(offer)}>Delete</button>
 
                             <button id="action-cancel" className={styles.btnC} type="button" onClick={onClose}>
                                 Cancel

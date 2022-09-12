@@ -70,7 +70,7 @@ const Home = () => {
                 {/* //---------Main-sidebar---------\\ */}
                 <div className={styles['main-content']}>
 
-                    {availableProducts
+                    {/* {availableProducts
                         ? availableProducts.map(x =>
                         (
                             <div className={styles.game} key={x._id}>
@@ -85,7 +85,7 @@ const Home = () => {
                         )
 
                         : <span> No products yet...</span>
-                    }
+                    } */}
 
                 </div>
 
