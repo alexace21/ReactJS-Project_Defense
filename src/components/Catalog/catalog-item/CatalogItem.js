@@ -1,8 +1,8 @@
 import styles from '../Catalog.module.css';
+import { Link } from 'react-router-dom'
 
-
-const CatalogItem = ({product}) => {
-    console.log(product)
+const CatalogItem = ({ product }) => {
+    console.log(product._id)
     return (
         <div className={styles.coin}>
             <div className={styles['coin-img']}>
@@ -14,8 +14,7 @@ const CatalogItem = ({product}) => {
                 <p><span>Category: </span>{product.category}</p>
             </div>
 
-
-            <a href={`/catalog/product-details/${product._id}`} className={styles["btn-details"]}>Details</a>
+            <Link to={`/catalog/product-details/${product._id}`} className={styles["btn-details"]}>Details</Link>
         </div>
     )
 };
