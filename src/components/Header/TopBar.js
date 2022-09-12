@@ -1,12 +1,24 @@
 import { Link } from 'react-router-dom';
 import { UserActions } from '../grid-section/UserConstants';
-import { useContext} from 'react';
+import { useContext, useState } from 'react';
 
 import AuthContext from '../../context/AuthContext';
+import ProductSearch from '../Catalog/search/ProductSearch';
 
 import styles from './TopBar.module.css';
 const Top_Bar = () => {
     const { user, userActionClickHandler } = useContext(AuthContext);
+    const [checkedSearch, setCheckedSearch] = useState(false);
+
+
+    setInterval(() => {
+        if (window.location.href === 'http://localhost:3000/catalog') {
+            setCheckedSearch(true);
+        } else {
+            setCheckedSearch(false);
+        }
+    }, 1000);
+
 
     return (
         <>
@@ -43,10 +55,8 @@ const Top_Bar = () => {
                     </div>
 
                     <div className={styles.navRight}>
-                        <div className={styles['search-box']}>
-                            <img src="./images/search.png" alt="searchImage" />
-                            <input type="text" placeholder='Search...' />
-                        </div>
+                        {checkedSearch && <ProductSearch />}
+
                         {/* Guest users */}
                         {user.email
                             ? <div className={styles.imgIcon}>

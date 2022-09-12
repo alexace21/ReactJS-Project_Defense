@@ -11,6 +11,7 @@ import Home from './components/Home/Home';
 import Catalog from './components/Catalog/Catalog';
 import Market from './components/grid-section/Market';
 import Search from './components/grid-section/Search/Search';
+import ProductSearch from './components/Catalog/search/ProductSearch';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Create from './components/Create/Create';
