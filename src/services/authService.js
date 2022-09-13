@@ -26,3 +26,5 @@ export const getAll = async() => await request.get(`${baseUrl}/users`);
 
 export const getOne = async(userId) => await request.get(`${baseUrl}/users/${userId}`);
 
+export const updateWinner = async(userId, productId) => await request.get(`${baseUrl}/users/${userId}/${productId}`);
+

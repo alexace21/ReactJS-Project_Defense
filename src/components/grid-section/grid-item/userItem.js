@@ -3,6 +3,7 @@ import { UserActions } from "../UserConstants";
 import { useNavigate } from 'react-router-dom';
 import styles from './UserItem.module.css';
 import * as marketService from '../../../services/marketService';
+import * as userService from '../../../services/authService';
 
 export const UserItem = ({ onActionClick, offer, user, setOffers }) => {
     const isOwner = offer.owner === user._id;
@@ -42,7 +43,9 @@ export const UserItem = ({ onActionClick, offer, user, setOffers }) => {
         getTimeRemaining(offer.duration)
     }, [])
 
-    if (timer === "00:00:01") {
+    const lastBidder = offer.bidders.slice((offer.bidders.length - 1));
+
+    if (timer === "23:55:01") {
         const deleteOfferEndpoint = `/market/${offer._id}`;
         navigate(deleteOfferEndpoint)
         marketService.del(offer._id)
@@ -51,11 +54,12 @@ export const UserItem = ({ onActionClick, offer, user, setOffers }) => {
                     .then(res => {
                         setOffers(res);
                         navigate('/market');
+                        userService.updateWinner(lastBidder, offer._id)
+                            .then(res => console.log(res));
                     })
             })
     }
 
-    const lastBidder = offer.bidders.slice((offer.bidders.length - 1))
 
     return (
         <Fragment>

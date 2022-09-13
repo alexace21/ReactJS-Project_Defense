@@ -37,6 +37,8 @@ function App() {
             {/* Market Page*/}
             <Route path='/market' element={[<Search />, <Market />]} />
             <Route path='/market/:productId' element={[<Search />, <Market />]} />
+            {/* Catalog Page  */}
+            <Route path='/catalog' element={<Catalog />} />
             {/* Login Page ( Only for Guest users ) */}
             <Route path='/login' element={<PrivateGuard><Login /></PrivateGuard>} />
             {/* Register Page ( Only for Guest users ) */}
@@ -47,7 +49,6 @@ function App() {
             <Route path='/create' element={<PrivateRoute><Create /></PrivateRoute>} />
             {/*Product-Details Page*/}
             <Route path='/catalog/product-details/:productId' element={<ProductDetails />} />
-            <Route path='/catalog' element={<Catalog />} />
             {/* 404 Page */}
             <Route path='/*' element={<Page404 />} />
           </Routes>
