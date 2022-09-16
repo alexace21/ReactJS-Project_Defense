@@ -25,7 +25,7 @@ import './App.css'
 function App() {
   return (
     <AuthProvider>
-      <div id="box">
+      <body id="box">
         {/* Navigation */}
         <Top_Bar />
         <main id='main-content'>
@@ -54,7 +54,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-      </div>
+      </body>
     </AuthProvider>
 
   );

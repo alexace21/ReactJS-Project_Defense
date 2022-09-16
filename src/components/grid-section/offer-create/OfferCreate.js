@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import * as marketService from '../../../services/marketService';
 import * as productService from '../../../services/productService';
 import styles from './OfferCreate.module.css';
@@ -40,16 +41,19 @@ export const OfferCreate = ({
     }
 
 
-    let availableProducts = [];
+    const [availableProducts, setAvailableProducts] = useState([]);
 
-    user.collections.map(x => {
-        productService.getOne(x)
-            .then(res => {
-                availableProducts.push(<option value={res._id}>{res.name}</option>);
-            })
-    })
+    useEffect(() => {
+        user.collections.map(x => {
+            productService.getAll(x)
+                .then(res => {
+                    setAvailableProducts(...availableProducts, res)
+                })
+        })
+    }, [])
+    
 
-    console.log(availableProducts)
+    console.log(availableProducts);
 
     return (
         < div className={styles.overlay} >
@@ -121,13 +125,8 @@ export const OfferCreate = ({
                         <div>
                             <label htmlFor="product">Available products</label>
                             <select id='product' name='product'>
-                                {user.collections.map(x => {
-                                    productService.getOne(x)
-                                        .then(res => {
-                                            console.log(res);
-                                            return (<option value={res._id}>{res.name}</option>);
-                                        })
-                                })}
+                                {availableProducts.map(x => <option value={x._id}>{x.name}</option>)
+                                }
                             </select>
                         </div>
                         <div className={styles['form-actions']}>
